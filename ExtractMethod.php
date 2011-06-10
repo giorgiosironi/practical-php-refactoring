@@ -14,9 +14,15 @@ class LogParser
 {
     public function getDayOfTheWeek($logLine)
     {
+        $date = $this->getDate($logLine);
+        return 'On ' . $date->format('l') . ' we got a visit';
+    }
+
+    function getDate($logLine)
+    {
         preg_match('([0-9]{2}/[0-9]{2}/[0-9]{4})', $logLine, $matches);
         $extractedDate = $matches[0];
         $date = new DateTime($extractedDate);
-        return 'On ' . $date->format('l') . ' we got a visit';
+        return $date;
     }
 }
