@@ -18,13 +18,4 @@ class LogParser
         $date = new DateTime($matches[0]);
         return 'On ' . $date->format('l') . ' we got a visit';
     }
-
-    /**
-     * @return DateTime
-     */
-    private function getDate($logLine)
-    {
-        preg_match('([0-9]{2}/[0-9]{2}/[0-9]{4})', $logLine, $matches);
-        return new DateTime($matches[0]);
-    }
 }
