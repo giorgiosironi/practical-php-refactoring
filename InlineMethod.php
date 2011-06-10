@@ -6,7 +6,7 @@ class InlineMethodTest extends PHPUnit_Framework_TestCase
         $logParser = new LogParser();
         $logLine = '127.0.0.1 - - [04/30/2011:17:07:31 +0200] "GET /favicon.ico HTTP/1.1" 404 450 "-" "Mozilla"';
         $day = $logParser->getDayOfTheWeek($logLine);
-        $this->assertEquals('On Saturday we got a visit', $day);
+        $this->assertEquals('On Saturday we got a visit from 127.0.0.1', $day);
     }
 }
 
