@@ -14,8 +14,9 @@ class LogParser
 {
     public function getDayOfTheWeek($logLine)
     {
-        preg_match('([0-9]{2}/[0-9]{2}/[0-9]{4})', $logLine, $matches);
-        $date = new DateTime($matches[0]);
-        return 'On ' . $date->format('l') . ' we got a visit';
+        preg_match('/([0-9.]*) (.*)([0-9]{2}\/[0-9]{2}\/[0-9]{4})/', $logLine, $matches);
+        $ip = $matches[1];
+        $date = new DateTime($matches[3]);
+        return 'On ' . $date->format('l') . ' we got a visit from ' . $ip;
     }
 }
