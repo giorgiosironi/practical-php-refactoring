@@ -35,15 +35,17 @@ class AccountView
     }
 
     /**
-     * This implementation doesn't work: $negative have different meanings in 
-     * case of negative total or negative total larger than the maximum overdraft.
+     * We get rid of $negative and inline. Since the code now sucks, we're ready
+     * for other refactorings that weren't possible while referring to
+     * $negative: it contained too few information for us to display the right
+     * colors.
      */
     public function render()
     {
-        $negative = $this->total < 0;
-        $class =  $negative ? 'red' : 'green';
-        if ($negative && $this->maximumOverdraft) {
-            $overdraftNotice =" (<span class=\"$class\">maximum overdraft: $this->maximumOverdraft</span>)";
+        $class =  $this->total < 0 ? 'red' : 'green';
+        if ($this->maximumOverdraft && $this->total < 0) {
+            $overDraftClass = 'green'; // this will become a computed value after we add more tests
+            $overdraftNotice =" (<span class=\"green\">maximum overdraft: $this->maximumOverdraft</span>)";
         } else {
             $overdraftNotice = '';
         }
