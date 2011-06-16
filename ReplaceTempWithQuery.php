@@ -25,13 +25,18 @@ class LoginForm
 
     public function __toString()
     {
-        if (isset($this->data['username'])) {
-            $username = $this->data['username'];
-        } else {
-            $username = '';
-        }
+        $username = $this->getUsername();
         $this->doSomethingWithTheUsername($username);
         return "...<input type=\"text\" name=\"username\" value=\"$username\" />...";
+    }
+
+    private function getUsername()
+    {
+        if (isset($this->data['username'])) {
+            return $this->data['username'];
+        } else {
+            return '';
+        } 
     }
 
     private function doSomethingWithTheUsername($username)
