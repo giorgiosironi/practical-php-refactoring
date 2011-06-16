@@ -25,7 +25,7 @@ class LoginForm
 
     public function __toString()
     {
-        $this->doSomethingWithTheUsername($this->getUsername());
+        $this->doSomethingWithTheUsername();
         return "...<input type=\"text\" name=\"username\" value=\"" . $this->getUsername() . "\" />...";
     }
 
@@ -38,8 +38,9 @@ class LoginForm
         } 
     }
 
-    private function doSomethingWithTheUsername($username)
+    private function doSomethingWithTheUsername()
     {
+        $this->getUsername();
         // this method is only here to provide an example of code
         // that will start utilizing the Query instead of the Temp
     }
