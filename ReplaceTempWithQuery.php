@@ -25,9 +25,8 @@ class LoginForm
 
     public function __toString()
     {
-        $username = $this->getUsername();
-        $this->doSomethingWithTheUsername($username);
-        return "...<input type=\"text\" name=\"username\" value=\"$username\" />...";
+        $this->doSomethingWithTheUsername($this->getUsername());
+        return "...<input type=\"text\" name=\"username\" value=\"" . $this->getUsername() . "\" />...";
     }
 
     private function getUsername()
