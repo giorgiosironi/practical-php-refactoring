@@ -44,13 +44,17 @@ class BayesClassifier
         $words = explode(' ', $mailText);
         foreach ($words as $word) {
             if (isset($this->features[$word])) {
-                $i = 0;
+                $likelihoods = $this->features[$word];
+                $possibleOutcome = 0;
                 foreach ($this->priors as $result => $prior) {
-                    $discriminators[$result] = $discriminators[$result] * $this->features[$word][$i];
-                    $i++;
+                    $adjustment = $likelihoods[$possibleOutcome];
+                    $discriminators[$result] = $discriminators[$result] * $adjustment;
+                    $possibleOutcome++;
                 }
             }
         }
-        return array_search(max($discriminators), $discriminators);
+        $highestLikelihood = max($discriminators);
+        $mostLikelyOutcome = array_search(max($discriminators), $discriminators);
+        return $mostLikelyOutcome;
     }
 }
