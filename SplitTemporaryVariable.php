@@ -18,7 +18,7 @@ class Adjustment
 
     public function apply(DateTime $date)
     {
-        $someMonthsInTheFuture = $date->add(new DateInterval('P3M'));
+        $someMonthsInTheFuture = $date->add(new DateInterval('P' . $this->minimumMonths . 'M'));
         $lastDayOfTheMonth = $someMonthsInTheFuture->setDate($someMonthsInTheFuture->format('Y'), $someMonthsInTheFuture->format('m'), $someMonthsInTheFuture->format('t'));
         return $lastDayOfTheMonth;
     }
