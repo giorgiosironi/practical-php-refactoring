@@ -18,8 +18,8 @@ class Adjustment
 
     public function apply(DateTime $date)
     {
-        $date = $date->add(new DateInterval('P3M'));
-        $date = $date->setDate($date->format('Y'), $date->format('m'), $date->format('t'));
+        $someMonthsInTheFuture = $date->add(new DateInterval('P3M'));
+        $date = $someMonthsInTheFuture->setDate($someMonthsInTheFuture->format('Y'), $someMonthsInTheFuture->format('m'), $someMonthsInTheFuture->format('t'));
         return $date;
     }
 }
