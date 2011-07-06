@@ -33,30 +33,38 @@ class Point
 
 class EarthDistance
 {
+    const EARTH_RADIUS = 6371;
+    const RADIAN = 57.2958;
     private $fromLatitude;
     private $fromLongitude;
     private $toLatitude;
     private $toLongitude;
 
+    /**
+     * Let's just save only the radians value of the angles: in this object,
+     * we only need this representation of them.
+     */
     public function __construct($fromLatitude, $fromLongitude, $toLatitude, $toLongitude)
     {
-        $this->fromLatitude = $fromLatitude;
-        $this->fromLongitude = $fromLongitude;
-        $this->toLatitude = $toLatitude;
-        $this->toLongitude = $toLongitude;
+        $this->fromLatitude = $fromLatitude / self::RADIAN;
+        $this->fromLongitude = $fromLongitude / self::RADIAN;
+        $this->toLatitude = $toLatitude / self::RADIAN;
+        $this->toLongitude = $toLongitude / self::RADIAN;
     }
 
     public function compute()
     {
-        $radian = 180/3.1415;
-        $radiansLatitude = $this->fromLatitude / $radian;
-        $anotherRadiansLatitude = $this->toLatitude / $radian;
-        $radiansLongitude = $this->fromLongitude / $radian;
-        $anotherRadiansLongitude = $this->toLongitude / $radian;
-        $radius = 6371;
-        $arc = acos(sin($radiansLatitude) * sin($anotherRadiansLatitude)
-                  + cos($radiansLatitude) * cos($anotherRadiansLatitude)
-                     * cos($radiansLongitude - $anotherRadiansLongitude));
-        return round($arc * $radius);
+        return round($this->angularDistance() * self::EARTH_RADIUS);
+    }
+
+    /**
+     * We still have the complex formula, but there is no method longer than 
+     * 4 lines (3 lines if we do not count the constructor.)
+     */
+    private function angularDistance()
+    {
+        return acos(sin($this->fromLatitude) * sin($this->toLatitude)
+                  + cos($this->fromLatitude) * cos($this->toLatitude)
+                     * cos($this->fromLongitude - $this->toLongitude));
     }
 }
