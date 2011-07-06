@@ -6,7 +6,6 @@ class ReplaceMethodWithMethodObjectTest extends PHPUnit_Framework_TestCase
         $london = new Point(51, 0);
         $rome = new Point(41, 12);
         $distance = $london->calculateDistance($rome);
-        var_dump($distance);
         $this->assertEquals(1444, $distance);
     }
 }
@@ -24,11 +23,36 @@ class Point
     
     public function calculateDistance(Point $anotherPoint)
     {
+        $distance = new EarthDistance($this->latitude,
+                                      $this->longitude,
+                                      $anotherPoint->latitude,
+                                      $anotherPoint->longitude);
+        return $distance->compute();
+    }
+}
+
+class EarthDistance
+{
+    private $fromLatitude;
+    private $fromLongitude;
+    private $toLatitude;
+    private $toLongitude;
+
+    public function __construct($fromLatitude, $fromLongitude, $toLatitude, $toLongitude)
+    {
+        $this->fromLatitude = $fromLatitude;
+        $this->fromLongitude = $fromLongitude;
+        $this->toLatitude = $toLatitude;
+        $this->toLongitude = $toLongitude;
+    }
+
+    public function compute()
+    {
         $radian = 180/3.1415;
-        $radiansLatitude = $this->latitude / $radian;
-        $anotherRadiansLatitude = $anotherPoint->latitude / $radian;
-        $radiansLongitude = $this->longitude / $radian;
-        $anotherRadiansLongitude = $anotherPoint->longitude / $radian;
+        $radiansLatitude = $this->fromLatitude / $radian;
+        $anotherRadiansLatitude = $this->toLatitude / $radian;
+        $radiansLongitude = $this->fromLongitude / $radian;
+        $anotherRadiansLongitude = $this->toLongitude / $radian;
         $radius = 6371;
         $arc = acos(sin($radiansLatitude) * sin($anotherRadiansLatitude)
                   + cos($radiansLatitude) * cos($anotherRadiansLatitude)
