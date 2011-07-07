@@ -29,16 +29,10 @@ class TagCloud
     {
         $html = '';
         foreach ($this->links as $link) {
-            $text = $this->linkText($link);
+            $text = $link->text();
             $html .= "<a href=\"$link\">$text</a>\n";
         }
         return $html;
-    }
-    
-    private function linkText(Link $link)
-    {
-        $lastFragment = substr(strrchr($link, '/'), 1);
-        return str_replace('%20', ' ', $lastFragment);
     }
 }
 
@@ -54,5 +48,23 @@ class Link
     public function __toString()
     {
         return $this->url;
+    }
+
+    /**
+     * The movement change the method in many ways:
+     * - simpler name
+     * - public visibility 
+     * - one less parameter
+     * The refactoring makes Link a behavior-rich Value Object, but this is 
+     * incidental; if I could have moved a method that used an external 
+     * service from Link to TagCloud. However, in these samples I have a 
+     * limited space and often many of my objects are Value Objects just 
+     * because I wanted to post running examples, and they are a really
+     * portable kind of code.
+     */
+    public function text()
+    {
+        $lastFragment = substr(strrchr($this, '/'), 1);
+        return str_replace('%20', ' ', $lastFragment);
     }
 }
