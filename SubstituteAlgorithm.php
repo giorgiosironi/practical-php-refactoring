@@ -28,18 +28,9 @@ class Phonebook
         $this->numbers[$name] = $number;
     }
 
-    /**
-     * I thought about writing a sorting algorithm, but...
-     * I opted to use a different, bundled sorting algorithm :)
-     */
     public function toHtml()
     {
-        $names = array_keys($this->numbers);
-        sort($names);
-        foreach ($names as $name) {
-            $numbers[$name] = $this->numbers[$name];
-        }
-        $this->numbers = $numbers;
+        $this->sortNumbersByName();
 
         $html = "<ul>\n";
         foreach ($this->numbers as $name => $number) {
@@ -47,5 +38,18 @@ class Phonebook
         }
         $html .= "</ul>\n";
         return $html;
+    }
+    
+    /**
+     * Let's start by isolating the algorithm.
+     */
+    private function sortNumbersByName()
+    {
+        $names = array_keys($this->numbers);
+        sort($names);
+        foreach ($names as $name) {
+            $numbers[$name] = $this->numbers[$name];
+        }
+        $this->numbers = $numbers;
     }
 }
