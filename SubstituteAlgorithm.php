@@ -45,11 +45,6 @@ class Phonebook
      */
     private function sortNumbersByName()
     {
-        $names = array_keys($this->numbers);
-        sort($names);
-        foreach ($names as $name) {
-            $numbers[$name] = $this->numbers[$name];
-        }
-        $this->numbers = $numbers;
+        ksort($this->numbers);
     }
 }
