@@ -32,8 +32,7 @@ class TagCloud
         $html = '';
         foreach ($this->links as $link) {
             $text = $link->text();
-            $rel = $link->getRel();
-            $html .= "<a href=\"$link\" rel=\"$rel\">$text</a>\n";
+            $html .= "<a href=\"$link\" rel=\"$this->rel\">$text</a>\n";
         }
         return $html;
     }
