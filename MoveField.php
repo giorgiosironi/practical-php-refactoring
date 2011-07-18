@@ -4,8 +4,8 @@ class MoveMethodTest extends PHPUnit_Framework_TestCase
     public function testDisplayItsLinksInShortForm()
     {
         $tagCloud = new TagCloud(array(
-            new Link('http://giorgiosironi.blogspot.com/search/label/productivity', 'archives'),
-            new Link('http://giorgiosironi.blogspot.com/search/label/software%20development', 'archives')
+            new Link('http://giorgiosironi.blogspot.com/search/label/productivity'),
+            new Link('http://giorgiosironi.blogspot.com/search/label/software%20development')
         ), 'archives');
         $html = $tagCloud->toHtml();
         $this->assertEquals(
@@ -41,22 +41,15 @@ class TagCloud
 class Link
 {
     private $url;
-    private $rel;
 
-    public function __construct($url, $rel = null)
+    public function __construct($url)
     {
         $this->url = $url;
-        $this->rel = $rel;
     }
 
     public function __toString()
     {
         return $this->url;
-    }
-
-    public function getRel()
-    {
-        return $this->rel;
     }
 
     public function text()
