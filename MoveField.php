@@ -6,7 +6,7 @@ class MoveMethodTest extends PHPUnit_Framework_TestCase
         $tagCloud = new TagCloud(array(
             new Link('http://giorgiosironi.blogspot.com/search/label/productivity', 'archives'),
             new Link('http://giorgiosironi.blogspot.com/search/label/software%20development', 'archives')
-        ));
+        ), 'archives');
         $html = $tagCloud->toHtml();
         $this->assertEquals(
             "<a href=\"http://giorgiosironi.blogspot.com/search/label/productivity\" rel=\"archives\">productivity</a>\n"
@@ -19,10 +19,12 @@ class MoveMethodTest extends PHPUnit_Framework_TestCase
 class TagCloud
 {
     private $links;
+    private $rel;
 
-    public function __construct(array $links)
+    public function __construct(array $links, $rel)
     {
         $this->links = $links;
+        $this->rel = $rel;
     }
 
     public function toHtml()
