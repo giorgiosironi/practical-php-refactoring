@@ -21,13 +21,8 @@ class MoneySpan
 
     public function toHtml()
     {
-        $html = '<span class="money">' . $this->format() . '</span>';
+        $html = '<span class="money">' . $this->amount->format() . '</span>';
         return $html;
-    }
-
-    private function format()
-    {
-        return $this->amount->format();
     }
 }
 
