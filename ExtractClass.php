@@ -27,15 +27,7 @@ class MoneySpan
 
     private function format()
     {
-        $amount = $this->amount->format();
-        $formatted = '';
-        while (strlen($amount) > 3) {
-            $cut = strlen($amount) % 3;
-            $cut = $cut == 0 ? 3 : $cut;
-            $formatted .= substr($amount, 0, $cut) . ',';
-            $amount = substr($amount, $cut);
-        }
-        return $formatted . $amount . '.00';
+        return $this->amount->format();
     }
 }
 
@@ -50,6 +42,14 @@ class MoneyAmount
 
     public function format()
     {
-        return $this->amount;
+        $amount = $this->amount;
+        $formatted = '';
+        while (strlen($amount) > 3) {
+            $cut = strlen($amount) % 3;
+            $cut = $cut == 0 ? 3 : $cut;
+            $formatted .= substr($amount, 0, $cut) . ',';
+            $amount = substr($amount, $cut);
+        }
+        return $formatted . $amount . '.00';
     }
 }
