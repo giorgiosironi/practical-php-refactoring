@@ -21,6 +21,12 @@ class MoneyAmount
 
     public function toHtml()
     {
+        $html = '<span class="money">' . $this->format() . '</span>';
+        return $html;
+    }
+
+    private function format()
+    {
         $amount = $this->amount;
         $formatted = '';
         while (strlen($amount) > 3) {
@@ -29,8 +35,7 @@ class MoneyAmount
             $formatted .= substr($amount, 0, $cut) . ',';
             $amount = substr($amount, $cut);
         }
-        $formatted .= $amount . '.00';
-        $html = "<span class=\"money\">$formatted</span>";
-        return $html;
+        return $formatted . $amount . '.00';
     }
 }
+
