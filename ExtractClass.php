@@ -4,7 +4,7 @@ class ExtractClassTest extends PHPUnit_Framework_TestCase
     public function testDisplaysMoneyInAHumanFormat()
     {
         // using strings for representation to avoid loss of precision
-        $moneyAmount = new MoneySpan('10000');
+        $moneyAmount = new MoneySpan(new MoneyAmount('10000'));
         $this->assertEquals('<span class="money">10,000.00</span>', $moneyAmount->toHtml());
     }
 }
@@ -14,7 +14,7 @@ class MoneySpan
     /**
      * @param int $amount
      */
-    public function __construct($amount)
+    public function __construct(MoneyAmount $amount)
     {
         $this->amount = $amount;
     }
@@ -27,7 +27,7 @@ class MoneySpan
 
     private function format()
     {
-        $amount = $this->amount;
+        $amount = $this->amount->format();
         $formatted = '';
         while (strlen($amount) > 3) {
             $cut = strlen($amount) % 3;
@@ -41,4 +41,15 @@ class MoneySpan
 
 class MoneyAmount
 {
+    private $amount;
+
+    public function __construct($amount)
+    {
+        $this->amount = $amount;
+    }
+
+    public function format()
+    {
+        return $this->amount;
+    }
 }
