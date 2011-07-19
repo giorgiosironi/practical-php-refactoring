@@ -4,12 +4,12 @@ class ExtractClassTest extends PHPUnit_Framework_TestCase
     public function testDisplaysMoneyInAHumanFormat()
     {
         // using strings for representation to avoid loss of precision
-        $moneyAmount = new MoneyAmount('10000');
+        $moneyAmount = new MoneySpan('10000');
         $this->assertEquals('<span class="money">10,000.00</span>', $moneyAmount->toHtml());
     }
 }
 
-class MoneyAmount
+class MoneySpan
 {
     /**
      * @param int $amount
@@ -39,3 +39,6 @@ class MoneyAmount
     }
 }
 
+class MoneyAmount
+{
+}
