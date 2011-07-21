@@ -64,6 +64,11 @@ class UserCollection
     {
         return $this->users[$name];
     }
+
+    public function activationOfUser($name, $activationNumber)
+    {
+        $this->users[$name]->activate($activationNumber);
+    }
 }
 
 /**
