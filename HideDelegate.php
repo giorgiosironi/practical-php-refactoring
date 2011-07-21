@@ -92,7 +92,6 @@ class UserController
         if (!isset($request['activationNumber'])) {
             throw new InvalidArgumentException('No activation number.');
         }
-        $user = $this->userCollection->getUser($request['name']);
-        $user->activate($request['activationNumber']);
+        $this->userCollection->activationOfUser($request['name'], $request['activationNumber']);
     }
 }
