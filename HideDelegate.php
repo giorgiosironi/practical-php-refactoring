@@ -72,8 +72,7 @@ class UserCollection
 }
 
 /**
- * The Client: this class gets an User instance and calls a method on it,
- * violating the Law of Demeter.
+ * The Client now does not know about the existence of the Delegate anymore.
  */
 class UserController
 {
