@@ -1,17 +1,18 @@
 <?php
 class RemoveMiddleMan extends PHPUnit_Framework_TestCase
 {
+    /**
+     * The User is now directly injected (it may be found at construction time.)
+     * We maintain the reference to the object in the test for verification
+     * purposes; this test has become a unit test and we could even use a Mock.
+     */
     public function testUserIsActivatedIfActivationTokenIsCorrect()
     {
-        $userCollection = new UserCollection(array(
-            'giorgio' => new User('giorgio', 42)
-        ));
-        $controller = new UserController($userCollection);
+        $controller = new UserController($user = new User('giorgio', 42));
         $controller->activation(array(
-            'name' => 'giorgio',
             'activationNumber' => 42
         ));
-        $this->assertTrue($userCollection->getUser('giorgio')->isActive());
+        $this->assertTrue($user->isActive());
     }
 }
 
@@ -44,45 +45,23 @@ class User
 }
 
 /**
- * The Server: this class hides a User instance.
- * We expose the User from UserCollection again: the goal is to remove
- * UserCollection afterwards.
- */
-class UserCollection
-{
-    private $users;
-
-    public function __construct(array $users)
-    {
-        $this->users = $users;
-    }
-
-    public function getUser($name)
-    {
-        return $this->users[$name];
-    }
-}
-
-/**
- * The Client now accesses a User object.
+ * The Client now only refers to an User object since it does not have any 
+ * other use for UserCollection.
  */
 class UserController
 {
-    private $userCollection;
+    private $user;
 
-    public function __construct(UserCollection $collection)
+    public function __construct(User $user)
     {
-        $this->userCollection = $collection;
+        $this->user = $user;
     }
 
     public function activation(array $request)
     {
-        if (!isset($request['name'])) {
-            throw new InvalidArgumentException('No user specified.');
-        }
         if (!isset($request['activationNumber'])) {
             throw new InvalidArgumentException('No activation number.');
         }
-        $this->userCollection->getUser($request['name'])->activate($request['activationNumber']);
+        $this->user->activate($request['activationNumber']);
     }
 }
