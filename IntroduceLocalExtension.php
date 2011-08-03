@@ -25,12 +25,12 @@ class LinkGroup
 
     public function add($url, $text)
     {
-        $this->newLink($url, $text);
+        $this->links->newLink($url, $text);
     }
 
     public function addUrl($url)
     {
-        $this->newLink($url, $url);
+        $this->links->newLink($url, $url);
     }
 
     public function __toString()
@@ -41,17 +41,6 @@ class LinkGroup
         }
         return implode("\n", $links);
     }
-
-    /**
-     * Foreign Method of the ArrayObject. Should be moved onto a newly extracted
-     * collaborator which wraps the ArrayObject, or an heap-like data structure
-     * should be used.
-     */
-    private function newLink($url, $text)
-    {
-        $this->links[$url] = $text;
-        $this->links->asort();
-    }
 }
 
 /**
@@ -59,4 +48,10 @@ class LinkGroup
  */
 class TextHeap extends ArrayObject
 {
+    public function newLink($url, $text)
+    {
+        $this[$url] = $text;
+        $this->asort();
+    }
+
 }
