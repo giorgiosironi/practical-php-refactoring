@@ -30,6 +30,11 @@ class Paragraph
 
     public function __toString()
     {
-        return "<p class=\"$this->class\">$this->text</p>";
+        return "<p class=\"" . $this->getClass() . "\">$this->text</p>";
+    }
+
+    protected function getClass()
+    {
+        return $this->class;
     }
 }
