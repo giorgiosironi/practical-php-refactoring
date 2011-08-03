@@ -42,6 +42,11 @@ class LinkGroup
         return implode("\n", $links);
     }
 
+    /**
+     * Foreign Method of the ArrayObject. Should be moved onto a newly extracted
+     * collaborator which wraps the ArrayObject, or an heap-like data structure
+     * should be used.
+     */
     private function newLink($url, $text)
     {
         $this->links[$url] = $text;
