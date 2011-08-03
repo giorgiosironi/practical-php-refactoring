@@ -25,14 +25,12 @@ class LinkGroup
 
     public function add($url, $text)
     {
-        $this->links[$url] = $text;
-        $this->links->asort();
+        $this->newLink($url, $text);
     }
 
     public function addUrl($url)
     {
-        $this->links[$url] = $url;
-        $this->links->asort();
+        $this->newLink($url, $url);
     }
 
     public function __toString()
@@ -42,5 +40,11 @@ class LinkGroup
             $links[] = "<a href=\"$url\">$text</a>";
         }
         return implode("\n", $links);
+    }
+
+    private function newLink($url, $text)
+    {
+        $this->links[$url] = $text;
+        $this->links->asort();
     }
 }
