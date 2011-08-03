@@ -20,7 +20,7 @@ class LinkGroup
 
     public function __construct()
     {
-        $this->links = new ArrayObject();
+        $this->links = new TextHeap();
     }
 
     public function add($url, $text)
