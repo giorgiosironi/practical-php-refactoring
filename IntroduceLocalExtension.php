@@ -53,3 +53,10 @@ class LinkGroup
         $this->links->asort();
     }
 }
+
+/**
+ * From PHP 5.3, we can also use SplHeap and derivations.
+ */
+class TextHeap extends ArrayObject
+{
+}
