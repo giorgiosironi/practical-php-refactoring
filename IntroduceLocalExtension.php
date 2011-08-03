@@ -16,27 +16,27 @@ class IntroduceLocalExtension extends PHPUnit_Framework_TestCase
 
 class LinkGroup
 {
-    private $links;
+    private $heap;
 
     public function __construct()
     {
-        $this->links = new TextHeap();
+        $this->heap = new TextHeap();
     }
 
     public function add($url, $text)
     {
-        $this->links->newLink($url, $text);
+        $this->heap->addElement($url, $text);
     }
 
     public function addUrl($url)
     {
-        $this->links->newLink($url, $url);
+        $this->heap->addElement($url, $url);
     }
 
     public function __toString()
     {
         $links = array();
-        foreach ($this->links as $url => $text) {
+        foreach ($this->heap as $url => $text) {
             $links[] = "<a href=\"$url\">$text</a>";
         }
         return implode("\n", $links);
@@ -48,9 +48,9 @@ class LinkGroup
  */
 class TextHeap extends ArrayObject
 {
-    public function newLink($url, $text)
+    public function addElement($key, $text)
     {
-        $this[$url] = $text;
+        $this[$key] = $text;
         $this->asort();
     }
 
