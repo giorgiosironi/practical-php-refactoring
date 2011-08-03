@@ -7,6 +7,14 @@ class SelfEncapsulateField extends PHPUnit_Framework_TestCase
         $expected = '<p class="important">Lorem ipsum</p>';
         $this->assertEquals($expected, $p->__toString());
     }
+
+    public function testParagraphIsDisplayedAsAlwaysImportant()
+    {
+        $this->markTestSkipped();
+        $p = new ImportantParagraph('Lorem ipsum');
+        $expected = '<p class="important">Lorem ipsum</p>';
+        $this->assertEquals($expected, $p->__toString());
+    }
 }
 
 class Paragraph
