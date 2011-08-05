@@ -24,4 +24,19 @@ class UserService
 
 class ChangePasswordCommand extends ArrayObject
 {
+    public function __construct($data)
+    {
+        if (!isset($data['userId'])) {
+            throw new Exception('User id is missing.');
+        }
+        parent::__construct($data);
+    }
+
+    public function getPassword()
+    {
+        if ($data['newPassword'] != $data['repeatNewPassword']) {
+            throw new Exception('Password do not match.');
+        }
+        return $data['newPassword'];
+    }
 }
