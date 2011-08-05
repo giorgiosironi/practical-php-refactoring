@@ -3,9 +3,12 @@ class ChangeValueToReference extends PHPUnit_Framework_TestCase
 {
     public function testAuthorIsChanged()
     {
-        $book = Book::fromTitleAndAuthor('Robots and empire', 'Unknown');
-        $book->changeAuthor('Asimov');
-        $this->assertEquals('Asimov', $book->getAuthor()->__toString());
+        $unknown = new Author('Unknown');
+        $asimov = new Author('Asimov');
+
+        $book = Book::fromTitleAndAuthor('Robots and empire', $unknown);
+        $book->changeAuthor($asimov);
+        $this->assertSame($asimov, $book->getAuthor());
     }
 }
 
@@ -16,11 +19,11 @@ class Book
 
     /**
      * This is just a Factory Method providing a name to the constructor
-     * for easier understanding.
+     * for easier understanding. This method cannot execute new anymore.
      */
-    public static function fromTitleAndAuthor($title, $authorName)
+    public static function fromTitleAndAuthor($title, Author $author)
     {
-        return new self($title, new Author($authorName));
+        return new self($title, $author);
     }
 
     private function __construct($title, $author)
@@ -30,12 +33,12 @@ class Book
     }
 
     /**
-     * Author is just a Value Object, so it can be created anywhere and 
-     * multiple copies of the same author be spread between objects.
+     * Author is now a Reference/Entity, so it cannot be created with new. The
+     * unique copy of Asimov or Unknown should be passed from the outside. 
      */
-    public function changeAuthor($newName)
+    public function changeAuthor($newAuthor)
     {
-        $this->author = new Author($newName);
+        $this->author = $newAuthor;
     }
 
     public function getAuthor()
