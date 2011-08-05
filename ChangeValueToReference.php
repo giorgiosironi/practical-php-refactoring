@@ -3,11 +3,14 @@ class ChangeValueToReference extends PHPUnit_Framework_TestCase
 {
     public function testAuthorIsChanged()
     {
+        // these become 'global' references, that should be picked up via
+        // a Repository or the ORM
         $unknown = new Author('Unknown');
         $asimov = new Author('Asimov');
 
         $book = Book::fromTitleAndAuthor('Robots and empire', $unknown);
         $book->changeAuthor($asimov);
+        // we can test for the same identity now
         $this->assertSame($asimov, $book->getAuthor());
     }
 }
