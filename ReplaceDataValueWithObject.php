@@ -34,9 +34,9 @@ class ChangePasswordCommand extends ArrayObject
 
     public function getPassword()
     {
-        if ($data['newPassword'] != $data['repeatNewPassword']) {
+        if ($this['newPassword'] != $this['repeatNewPassword']) {
             throw new Exception('Password do not match.');
         }
-        return $data['newPassword'];
+        return $this['newPassword'];
     }
 }
