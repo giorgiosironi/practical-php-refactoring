@@ -33,10 +33,10 @@ class Color
 
 class ReferenceObjectTest extends PHPUnit_Framework_TestCase
 {
-    public function testASingleInstanceCanBeCreated()
+    public function testEqualInstancesCanBeCreated()
     {
         $blue = Color::getColor(0, 0, 255);
         $anotherBlue = Color::getColor(0, 0, 255);
-        $this->assertSame($blue, $anotherBlue);
+        $this->assertEquals($blue, $anotherBlue);
     }
 }
