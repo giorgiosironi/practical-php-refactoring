@@ -18,11 +18,12 @@ class ReplaceArrayWithObjectTest extends PHPUnit_Framework_TestCase
 
 class HttpResponse
 {
-    public $data;
+    private $data;
 
     public function __construct(array $data)
     {
-        $this->data = $data;
+        $this->setSuccess($data['success']);
+        $this->setContent($data['content']);
     }
 
     public function setSuccess($boolean)
