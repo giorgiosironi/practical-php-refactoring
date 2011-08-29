@@ -35,16 +35,18 @@ class Invoice
 class InvoiceView
 {
     private $rows;
+    private $total;
 
     public function __construct(Invoice $invoice)
     {
         $this->rows = $invoice->getRows();
+        $this->total = $invoice->getTotal();
     }
 
     public function __toString()
     {
         return implode("\n", $this->rows)
              . "\n---\n"
-             . array_sum($this->rows);
+             . $this->total;
     }
 }
