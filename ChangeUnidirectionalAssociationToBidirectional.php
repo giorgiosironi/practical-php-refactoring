@@ -22,6 +22,7 @@ class User
     public function addPhonenumber(Phonenumber $phonenumber)
     {
         $this->phonenumbers[] = $phonenumber;
+        $phonenumber->internalSetUser($this);
     }
 
     public function phonenumbersList()
