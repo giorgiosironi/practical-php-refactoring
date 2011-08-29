@@ -25,6 +25,11 @@ class Invoice
     {
         return $this->rows;
     }
+
+    public function getTotal()
+    {
+        return array_sum($this->rows);
+    }
 }
 
 class InvoiceView
