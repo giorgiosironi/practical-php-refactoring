@@ -48,6 +48,11 @@ class Phonenumber
         $this->number = $number;
     }
 
+    public function internalSetUser(User $u)
+    {
+        $this->user = $u;
+    }
+
     public function __toString()
     {
         return $this->number;
