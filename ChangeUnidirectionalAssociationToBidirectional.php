@@ -29,9 +29,14 @@ class User
     {
         $list = '';
         foreach ($this->phonenumbers as $number) {
-            $list .= "$this->name: $number\n";
+            $list .= "$number\n";
         }
         return $list;
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }
 
@@ -56,6 +61,6 @@ class Phonenumber
 
     public function __toString()
     {
-        return $this->number;
+        return $this->user->getName() . ': ' . $this->number;
     }
 }
