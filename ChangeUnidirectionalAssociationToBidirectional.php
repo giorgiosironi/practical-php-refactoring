@@ -38,6 +38,11 @@ class Phonenumber
 {
     private $number;
 
+    /**
+     * @var User
+     */
+    private $user;
+
     public function __construct($number)
     {
         $this->number = $number;
