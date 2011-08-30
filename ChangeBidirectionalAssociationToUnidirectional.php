@@ -22,7 +22,6 @@ class User
     public function addPhonenumber(Phonenumber $phonenumber)
     {
         $this->phonenumbers[] = $phonenumber;
-        $phonenumber->internalSetUser($this);
     }
 
     public function phonenumbersList()
@@ -47,10 +46,6 @@ class Phonenumber
     public function __construct($number)
     {
         $this->number = $number;
-    }
-
-    public function internalSetUser(User $u)
-    {
     }
 
     public function __toString()
