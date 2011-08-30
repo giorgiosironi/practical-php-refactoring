@@ -44,11 +44,6 @@ class Phonenumber
 {
     private $number;
 
-    /**
-     * @var User
-     */
-    private $user;
-
     public function __construct($number)
     {
         $this->number = $number;
@@ -56,7 +51,6 @@ class Phonenumber
 
     public function internalSetUser(User $u)
     {
-        $this->user = $u;
     }
 
     public function __toString()
