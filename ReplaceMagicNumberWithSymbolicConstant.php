@@ -1,19 +1,26 @@
 <?php
 class ReplaceMagicNumberWithSymbolicConstant extends PHPUnit_Framework_TestCase
 {
+    private $totalCards;
+
+    public function setUp()
+    {
+        $this->totalCards = Deck::SUITS * Deck::RANGE;
+    }
+
     public function testDeckIsFilledWithCardsInitially()
     {
         $deck = new Deck();
-        $this->assertEquals(52, count($deck));
+        $this->assertEquals($this->totalCards, count($deck));
     }
 
     public function testDeckCanDrawAllItsCards()
     {
         $deck = new Deck();
-        for ($i = 0; $i < 52; $i++) {
+        for ($i = 0; $i < $this->totalCards; $i++) {
             $card = $deck->draw();
             $this->assertGreaterThanOrEqual(1, $card);
-            $this->assertLessThanOrEqual(13, $card);
+            $this->assertLessThanOrEqual(Deck::RANGE, $card);
         }
         $this->assertEquals(0, count($deck));
     }
@@ -28,8 +35,8 @@ class Deck implements Countable
     public function __construct()
     {
         $this->cards = array();
-        for ($i = 0; $i < 4; $i++) {
-            $this->cards = array_merge($this->cards, range(1, 13));
+        for ($i = 0; $i < self::SUITS; $i++) {
+            $this->cards = array_merge($this->cards, range(1, self::RANGE));
         }
     }
     public function count()
