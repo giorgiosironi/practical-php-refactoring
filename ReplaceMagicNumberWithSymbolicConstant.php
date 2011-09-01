@@ -21,6 +21,8 @@ class ReplaceMagicNumberWithSymbolicConstant extends PHPUnit_Framework_TestCase
 
 class Deck implements Countable
 {
+    const RANGE = 13;
+    const SUITS = 4;
     private $cards;
 
     public function __construct()
