@@ -11,7 +11,7 @@ class EncapsulateField extends PHPUnit_Framework_TestCase
 
 class Reservation
 {
-    public $date;
+    private $date;
 
     /**
      * @param string $date
