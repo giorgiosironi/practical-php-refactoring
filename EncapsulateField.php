@@ -13,6 +13,14 @@ class Reservation
 {
     public $date;
 
+    /**
+     * @param string $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
     public function isOutdated()
     {
         // global state! Avoid this in real code
