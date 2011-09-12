@@ -25,9 +25,12 @@ class User
         $this->groups->append($group);
     }
 
+    /**
+     * @return array
+     */
     public function getGroups()
     {
-        return $this->groups;
+        return $this->groups->getArrayCopy();
     }
 }
 
