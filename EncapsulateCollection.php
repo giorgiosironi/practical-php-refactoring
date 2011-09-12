@@ -18,6 +18,16 @@ class User
 {
     private $groups;
 
+    public function __construct()
+    {
+        $this->groups = new ArrayObject();
+    }
+
+    public function addGroup(Group $group)
+    {
+        $this->groups->append($group);
+    }
+
     public function setGroups(ArrayObject $groups)
     {
         $this->groups = $groups;
