@@ -8,7 +8,7 @@ class ReplaceRecordWithDataClass extends PHPUnit_Framework_TestCase
     {
         $users = new UsersTable();
         $giorgio = $users->find(42);
-        $this->assertEquals('Giorgio', $giorgio['name']);
+        $this->assertEquals('Giorgio', $giorgio->getName());
     }
 }
 
@@ -26,6 +26,25 @@ class UsersTable
     public function find($id)
     {
         // execute a PDOStatement and fetch the data
-        return array('id' => 42, 'name' => 'Giorgio');
+        return User::fromRecord(array('id' => 42, 'name' => 'Giorgio'));
+    }
+}
+
+class User
+{
+    private $id;
+    private $name;
+
+    public static function fromRecord(array $record)
+    {
+        $object = new self();
+        $object->id = $record['id'];
+        $object->name = $record['name'];
+        return $object;
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }
