@@ -15,16 +15,21 @@ class User
     const NEWBIE = 'N';
     const GURU = 'G';
 
-    private $rank = 'N';
+    private $rank;
+
+    public function __construct()
+    {
+        $this->rank = new Rank('N');
+    }
 
     public function setRank($rank)
     {
-        $this->rank = $rank;
+        $this->rank = new Rank($rank);
     }
 
     public function getRank()
     {
-        return $this->rank;
+        return $this->rank->getCode();
     }
 }
 
