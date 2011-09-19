@@ -27,3 +27,28 @@ class User
         return $this->rank;
     }
 }
+
+class Rank
+{
+    private $code;
+
+    public function __construct($code)
+    {
+        $this->code = $code;
+    }
+
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    public static function newbie()
+    {
+        return new self('N');
+    }
+
+    public static function guru()
+    {
+        return new self('G');
+    }
+}
