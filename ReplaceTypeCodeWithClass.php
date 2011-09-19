@@ -4,32 +4,29 @@ class ReplaceTypeCodeWithClass extends PHPUnit_Framework_TestCase
     public function testAnUserCanBeANewbieOrAGuru()
     {
         $user = new User();
-        $this->assertEquals(User::NEWBIE, $user->getRank());
-        $user->setRank(User::GURU);
-        $this->assertEquals(User::GURU, $user->getRank());
+        $this->assertEquals(Rank::newbie(), $user->getRank());
+        $user->setRank(Rank::guru());
+        $this->assertEquals(Rank::guru(), $user->getRank());
     }
 }
 
 class User
 {
-    const NEWBIE = 'N';
-    const GURU = 'G';
-
     private $rank;
 
     public function __construct()
     {
-        $this->rank = new Rank('N');
+        $this->rank = Rank::newbie();
     }
 
-    public function setRank($rank)
+    public function setRank(Rank $rank)
     {
-        $this->rank = new Rank($rank);
+        $this->rank = $rank;
     }
 
     public function getRank()
     {
-        return $this->rank->getCode();
+        return $this->rank;
     }
 }
 
@@ -37,7 +34,7 @@ class Rank
 {
     private $code;
 
-    public function __construct($code)
+    private function __construct($code)
     {
         $this->code = $code;
     }
