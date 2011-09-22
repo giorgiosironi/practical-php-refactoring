@@ -42,3 +42,8 @@ class User
         return $this->name;
     }
 }
+
+class Rank
+{
+    public abstract function getCode();
+}
