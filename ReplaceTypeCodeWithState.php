@@ -35,17 +35,14 @@ class User
 
     public function __toString()
     {
-        if ($this->getRank() == self::GURU) {
-            return "ADMIN: $this->name";
-        }
-        // self::NEWBIE
-        return $this->name;
+        return $this->rank->label() . $this->name;
     }
 }
 
 class Rank
 {
     public abstract function getCode();
+    public abstract function label();
 }
 
 class NewbieRank
@@ -54,6 +51,11 @@ class NewbieRank
     {
         return User::NEWBIE;
     }
+
+    public function label()
+    {
+        return '';
+    }
 }
 
 class GuruRank
@@ -61,5 +63,10 @@ class GuruRank
     public function getCode()
     {
         return User::GURU;
+    }
+
+    public function label()
+    {
+        return 'ADMIN: ';
     }
 }
