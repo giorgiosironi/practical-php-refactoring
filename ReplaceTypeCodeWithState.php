@@ -28,9 +28,14 @@ class User
         $this->rank = $rank;
     }
 
+    protected function getRank()
+    {
+        return $this->rank;
+    }
+
     public function __toString()
     {
-        if ($this->rank == self::GURU) {
+        if ($this->getRank() == self::GURU) {
             return "ADMIN: $this->name";
         }
         // self::NEWBIE
