@@ -3,13 +3,13 @@ class ReplaceTypeCodeWithState extends PHPUnit_Framework_TestCase
 {
     public function testAnUserCanBeANewbie()
     {
-        $user = new User("Giorgio", User::NEWBIE);
+        $user = new User("Giorgio", new NewbieRank);
         $this->assertEquals("Giorgio", $user->__toString());
     }
 
     public function testAnUserCanBeRegardedAsAGuru()
     {
-        $user = new User("Giorgio", User::GURU);
+        $user = new User("Giorgio", new GuruRank);
         $this->assertEquals("ADMIN: Giorgio", $user->__toString());
     }
 }
@@ -22,7 +22,7 @@ class User
     private $name;
     private $rank;
 
-    public function __construct($name, $rank)
+    public function __construct($name, Rank $rank)
     {
         $this->name = $name;
         $this->rank = $rank;
@@ -30,7 +30,7 @@ class User
 
     protected function getRank()
     {
-        return $this->rank;
+        return $this->rank->getCode();
     }
 
     public function __toString()
@@ -46,4 +46,20 @@ class User
 class Rank
 {
     public abstract function getCode();
+}
+
+class NewbieRank
+{
+    public function getCode()
+    {
+        return User::NEWBIE;
+    }
+}
+
+class GuruRank
+{
+    public function getCode()
+    {
+        return User::GURU;
+    }
 }
