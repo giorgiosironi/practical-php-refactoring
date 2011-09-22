@@ -38,15 +38,6 @@ class User
     {
         return $this->rank;
     }
-
-    public function __toString()
-    {
-        if ($this->getRank() == self::GURU) {
-            return "ADMIN: $this->name";
-        }
-        // self::NEWBIE
-        return $this->name;
-    }
 }
 
 class Guru extends User
@@ -55,6 +46,11 @@ class Guru extends User
     {
         return self::GURU;
     }
+
+    public function __toString()
+    {
+        return "ADMIN: $this->name";
+    }
 }
 
 class Newbie extends User
@@ -62,5 +58,10 @@ class Newbie extends User
     protected function getRank()
     {
         return self::NEWBIE;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
