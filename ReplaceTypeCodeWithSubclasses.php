@@ -20,20 +20,18 @@ class User
     const GURU = 'G';
 
     protected $name;
-    private $rank;
 
-    public function __construct($name, $rank)
+    public function __construct($name)
     {
         $this->name = $name;
-        $this->rank = $rank;
     }
 
     public static function newUser($name, $rank)
     {
         if ($rank == self::GURU) {
-            return new Guru($name, null);
+            return new Guru($name);
         }
-        return new Newbie($name, null);
+        return new Newbie($name);
     }
 
     protected function getRank()
