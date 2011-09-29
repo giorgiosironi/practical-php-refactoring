@@ -39,13 +39,13 @@ class User
     }
 }
 
-class Rank
+abstract class Rank
 {
     public abstract function getCode();
     public abstract function label();
 }
 
-class NewbieRank
+class NewbieRank extends Rank
 {
     public function getCode()
     {
@@ -58,7 +58,7 @@ class NewbieRank
     }
 }
 
-class GuruRank
+class GuruRank extends Rank
 {
     public function getCode()
     {
