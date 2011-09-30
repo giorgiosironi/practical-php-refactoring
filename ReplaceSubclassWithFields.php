@@ -16,7 +16,7 @@ class ReplaceSubclassWithFields extends PHPUnit_Framework_TestCase
     }
 }
 
-abstract class Link
+class Link
 {
     private $href;
     private $text;
@@ -31,12 +31,12 @@ abstract class Link
 
     public static function internalLink($href, $text)
     {
-        return new InternalLink($href, $text, 'internal');
+        return new Link($href, $text, 'internal');
     }
 
     public static function externalLink($href, $text)
     {
-        return new ExternalLink($href, $text, 'external');
+        return new Link($href, $text, 'external');
     }
 
     public function __toString()
@@ -45,12 +45,4 @@ abstract class Link
              . '" class="' . $this->cssClass . '">'
              . $this->text . '</a>';
     }
-}
-
-class InternalLink extends Link
-{
-}
-
-class ExternalLink extends Link
-{
 }
