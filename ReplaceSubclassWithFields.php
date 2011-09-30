@@ -20,21 +20,23 @@ abstract class Link
 {
     private $href;
     private $text;
+    private $cssClass;
 
-    public function __construct($href, $text)
+    public function __construct($href, $text, $cssClass)
     {
         $this->href = $href;
         $this->text = $text;
+        $this->cssClass = $cssClass;
     }
 
     public static function internalLink($href, $text)
     {
-        return new InternalLink($href, $text);
+        return new InternalLink($href, $text, 'internal');
     }
 
     public static function externalLink($href, $text)
     {
-        return new ExternalLink($href, $text);
+        return new ExternalLink($href, $text, 'external');
     }
 
     public function __toString()
