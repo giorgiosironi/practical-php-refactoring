@@ -1,17 +1,10 @@
 <?php
 class ReplaceSubclassWithFields extends PHPUnit_Framework_TestCase
 {
-    public function testInternalLinkShouldRender()
+    public function testInternalLinkShouldRenderWithTheRightCssClass()
     {
-        $a = Link::internalLink('/posts/32', 'Last post');
-        $this->assertEquals('<a href="/posts/32" class="internal">Last post</a>',
-                            $a->__toString());
-    }
-
-    public function testExternalLinkShouldRender()
-    {
-        $a = Link::externalLink('http://www.google.com', 'Google');
-        $this->assertEquals('<a href="http://www.google.com" class="external">Google</a>',
+        $a = new Link('/posts/32', 'Last post', 'myClass');
+        $this->assertEquals('<a href="/posts/32" class="myClass">Last post</a>',
                             $a->__toString());
     }
 }
