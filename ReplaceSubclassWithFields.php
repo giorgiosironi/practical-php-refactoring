@@ -42,25 +42,15 @@ abstract class Link
     public function __toString()
     {
         return '<a href="' . $this->href 
-             . '" class="' . $this->getCssClass() . '">'
+             . '" class="' . $this->cssClass . '">'
              . $this->text . '</a>';
     }
-
-    abstract protected function getCssClass();
 }
 
 class InternalLink extends Link
 {
-    public function getCssClass()
-    {
-        return 'internal';
-    }
 }
 
 class ExternalLink extends Link
 {
-    public function getCssClass()
-    {
-        return 'external';
-    }
 }
