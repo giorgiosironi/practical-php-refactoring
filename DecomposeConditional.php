@@ -36,7 +36,7 @@ class Group
     public function __toString()
     {
         if ($this->shouldBeInEvidence()) {
-            return "<span class=\"evidence\">In evidence: $this->name</span>";
+            return $this->inEvidenceLabel();
         } else {
             return "<span>$this->name</span>";
         }
@@ -46,5 +46,10 @@ class Group
     {
         return $this->posts > 50
             || $this->recentlyCreated;
+    }
+
+    private function inEvidenceLabel()
+    {
+        return "<span class=\"evidence\">In evidence: $this->name</span>";
     }
 }
