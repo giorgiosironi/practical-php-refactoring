@@ -35,10 +35,16 @@ class Group
 
     public function __toString()
     {
-        if ($this->posts > 50 || $this->recentlyCreated) {
+        if ($this->shouldBeInEvidence()) {
             return "<span class=\"evidence\">In evidence: $this->name</span>";
         } else {
             return "<span>$this->name</span>";
         }
+    }
+
+    private function shouldBeInEvidence()
+    {
+        return $this->posts > 50
+            || $this->recentlyCreated;
     }
 }
