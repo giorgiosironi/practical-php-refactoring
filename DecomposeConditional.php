@@ -38,7 +38,7 @@ class Group
         if ($this->shouldBeInEvidence()) {
             return $this->inEvidenceLabel();
         } else {
-            return "<span>$this->name</span>";
+            return $this->ordinaryLabel();
         }
     }
 
@@ -51,5 +51,10 @@ class Group
     private function inEvidenceLabel()
     {
         return "<span class=\"evidence\">In evidence: $this->name</span>";
+    }
+    
+    private function ordinaryLabel()
+    {
+        return "<span>$this->name</span>";
     }
 }
