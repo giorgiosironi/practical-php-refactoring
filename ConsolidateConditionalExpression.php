@@ -35,10 +35,7 @@ class Group
 
     public function __toString()
     {
-        if ($this->posts > 50) {
-            return "<span class=\"evidence\">In evidence: $this->name</span>";
-        }
-        if ($this->recentlyCreated) {
+        if ($this->posts > 50 || $this->recentlyCreated) {
             return "<span class=\"evidence\">In evidence: $this->name</span>";
         } 
         return "<span>$this->name</span>";
