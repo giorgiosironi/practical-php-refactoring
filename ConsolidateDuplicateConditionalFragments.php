@@ -34,7 +34,8 @@ class Invoice
             $total = $this->taxable * (1 - $this->discount / 100);
             return $total * (1 + $this->taxRate / 100);
         } else {
-            return ($this->taxable + self::PROCESSING_FEE) * (1 + $this->taxRate / 100);
+            $total = $this->taxable + self::PROCESSING_FEE;
+            return $total * (1 + $this->taxRate / 100);
         }
     }
 }
