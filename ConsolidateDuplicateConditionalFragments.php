@@ -3,21 +3,25 @@ class ConsolidateDuplicateConditionalFragments extends PHPUnit_Framework_TestCas
 {
     public function testTotalPaymentIncludeTaxesAndProcessingFee()
     {
-        $invoice = new Invoice(990, 21, new Discount(false));
+        $invoice = new Invoice(990, 21, new ProcessingFee);
         $this->assertEquals(1210, $invoice->getTotal());
     }
 
     public function testTotalCanBeDiscountedBeforeTaxes()
     {
-        $invoice = new Invoice(1250, 21, new Discount(20));
+        $invoice = new Invoice(1250, 21, new PercentageDiscount(20));
         $this->assertEquals(1210, $invoice->getTotal());
     }
 }
 
-class Discount
+interface Discount
+{
+    public function discount($amount);
+}
+
+class PercentageDiscount implements Discount
 {
     private $rate;
-    const PROCESSING_FEE = 10;
 
     public function __construct($rate)
     {
@@ -26,11 +30,17 @@ class Discount
 
     public function discount($amount)
     {
-        if ($this->rate) {
-            return $amount * (1 - $this->rate / 100);
-        } else {
-            return $amount + self::PROCESSING_FEE;
-        }
+        return $amount * (1 - $this->rate / 100);
+    }
+}
+
+class ProcessingFee implements Discount
+{
+    const PROCESSING_FEE = 10;
+
+    public function discount($amount)
+    {
+        return $amount + self::PROCESSING_FEE;
     }
 }
 
