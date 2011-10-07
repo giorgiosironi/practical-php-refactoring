@@ -14,12 +14,12 @@ class ConsolidateDuplicateConditionalFragments extends PHPUnit_Framework_TestCas
     }
 }
 
-interface Discount
+interface PaymentModifier
 {
-    public function discount($amount);
+    public function applyOn($amount);
 }
 
-class PercentageDiscount implements Discount
+class PercentageDiscount implements PaymentModifier
 {
     private $rate;
 
@@ -28,17 +28,17 @@ class PercentageDiscount implements Discount
         $this->rate = $rate;
     }
 
-    public function discount($amount)
+    public function applyOn($amount)
     {
         return $amount * (1 - $this->rate / 100);
     }
 }
 
-class ProcessingFee implements Discount
+class ProcessingFee implements PaymentModifier
 {
     const PROCESSING_FEE = 10;
 
-    public function discount($amount)
+    public function applyOn($amount)
     {
         return $amount + self::PROCESSING_FEE;
     }
@@ -48,18 +48,18 @@ class Invoice
 {
     private $taxable;
     private $taxRate;
-    private $discount;
+    private $paymentModifier;
 
-    public function __construct($taxable, $taxRate, Discount $discount)
+    public function __construct($taxable, $taxRate, PaymentModifier $paymentModifier)
     {
         $this->taxable = $taxable;
         $this->taxRate = $taxRate;
-        $this->discount = $discount;
+        $this->paymentModifier = $paymentModifier;
     }
 
     public function getTotal()
     {
-        $total = $this->discount->discount($this->taxable);
+        $total = $this->paymentModifier->applyOn($this->taxable);
         return $total * (1 + $this->taxRate / 100);
     }
 }
