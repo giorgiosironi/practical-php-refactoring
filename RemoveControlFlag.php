@@ -20,10 +20,9 @@ class Users
     public function findUserWithNameAsShortAs($length)
     {
         foreach ($this->users as $user) {
-            if (strlen($user) == 3) {
+            if (strlen($user) == $length) {
                 return $user;
             }
         }
     }
-}
 
