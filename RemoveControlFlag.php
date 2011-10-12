@@ -19,13 +19,11 @@ class Users
 
     public function findUserWithNameAsShortAs($length)
     {
-        $found = false;
         $i = 0;
         $length = count($this->users);
-        while ($i < $length && !$found) {
+        while ($i < $length) {
             $user = $this->users[$i];
             if (strlen($user) == 3) {
-                $found = true;
                 return $user;
             }
             $i++;
