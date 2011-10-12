@@ -26,10 +26,10 @@ class Users
             $user = $this->users[$i];
             if (strlen($user) == 3) {
                 $found = true;
+                return $user;
             }
             $i++;
         }
-        return $user;
     }
 }
 
