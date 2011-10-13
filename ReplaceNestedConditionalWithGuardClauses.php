@@ -35,11 +35,13 @@ class Topic
 
     public function __toString()
     {
+        if ($this->isClosed && $this->isAdminViewing) {
+            return "Closed (not for you): $this->title";
+        }
         if (!$this->isClosed) {
             $displayed = $this->title;
         } else {
             if ($this->isAdminViewing) {
-                $displayed = "Closed (not for you): $this->title";
             } else {
                 $displayed = "Closed: $this->title";
             }
