@@ -38,12 +38,14 @@ class Topic
         if ($this->isClosed && $this->isAdminViewing) {
             return "Closed (not for you): $this->title";
         }
+        if ($this->isClosed) {
+            return "Closed: $this->title";
+        }
         if (!$this->isClosed) {
             $displayed = $this->title;
         } else {
             if ($this->isAdminViewing) {
             } else {
-                $displayed = "Closed: $this->title";
             }
         }
         return $displayed;
