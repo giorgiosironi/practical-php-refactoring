@@ -41,6 +41,8 @@ class Topic
         if ($this->isClosed) {
             return "Closed: $this->title";
         }
+        return $this->title;
+
         if (!$this->isClosed) {
             $displayed = $this->title;
         } else {
