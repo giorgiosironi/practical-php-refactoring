@@ -23,19 +23,19 @@ class ReplaceNestedConditionalWithGuardClauses extends PHPUnit_Framework_TestCas
 class Topic
 {
     private $title;
-    private $isClosed;
+    private $topicState;
     private $isAdminViewing;
 
-    public function __construct($title, TopicState $isClosed, $isAdminViewing = false)
+    public function __construct($title, TopicState $topicState, $isAdminViewing = false)
     {
         $this->title = $title;
-        $this->isClosed = $isClosed;
+        $this->topicState = $topicState;
         $this->isAdminViewing = $isAdminViewing;
     }
 
     public function __toString()
     {
-        return $this->isClosed->topicCaption($this->isAdminViewing)
+        return $this->topicState->topicCaption($this->isAdminViewing)
              . $this->title;
     }
 }
