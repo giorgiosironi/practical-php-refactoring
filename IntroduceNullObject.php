@@ -27,10 +27,7 @@ class User
 
     public function getDescription()
     {
-        if ($this->group instanceof NoGroup) {
-            return $this->name . ' does not belong to a group yet';
-        }
-        return $this->name . ' belongs to ' . $this->group->getName();
+        return $this->group->belonging($this->name);
     }
 }
 
@@ -47,9 +44,19 @@ class Group
     {
         return $this->name;
     }
+
+    public function belonging($name)
+    {
+        return $name . ' belongs to ' . $this->name;
+    }
 }
 
 class NoGroup extends Group
 {
     public function __construct() {}
+
+    public function belonging($name)
+    {
+        return $name . ' does not belong to a group yet';
+    }
 }
