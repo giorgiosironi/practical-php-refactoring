@@ -28,14 +28,9 @@ class User extends Addressable
         $this->name = $name;
     }
 
-    public function getName()
-    {
-        return $this->name;
-    }
-
     public function render($template)
     {
-        return sprintf($template, $this->getName(), $this->getName());
+        return sprintf($template, $this->name, $this->name);
     }
 }
 
@@ -50,19 +45,9 @@ class Brand extends Addressable
         $this->url = $url;
     }
 
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function getURL()
-    {
-        return $this->url;
-    }
-
     public function render($template)
     {
-        return sprintf($template, $this->getUrl(), $this->getName());
+        return sprintf($template, $this->url, $this->name);
     }
 }
 
