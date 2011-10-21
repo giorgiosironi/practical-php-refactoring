@@ -9,7 +9,7 @@ class IntroduceNullObject extends PHPUnit_Framework_TestCase
 
     public function testAUserWithoutAGroupDoesNotHaveABadge()
     {
-        $user = new User('giorgio', null);
+        $user = new User('giorgio', new NoGroup);
         $this->assertEquals('giorgio does not belong to a group yet', $user->getDescription());
     }
 }
@@ -19,7 +19,7 @@ class User
     private $name;
     private $group;
 
-    public function __construct($name, Group $group = null)
+    public function __construct($name, Group $group)
     {
         $this->name = $name;
         $this->group = $group;
@@ -27,7 +27,7 @@ class User
 
     public function getDescription()
     {
-        if ($this->group === null) {
+        if ($this->group instanceof NoGroup) {
             return $this->name . ' does not belong to a group yet';
         }
         return $this->name . ' belongs to ' . $this->group->getName();
@@ -47,4 +47,9 @@ class Group
     {
         return $this->name;
     }
+}
+
+class NoGroup extends Group
+{
+    public function __construct() {}
 }
