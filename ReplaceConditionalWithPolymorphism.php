@@ -16,17 +16,7 @@ class ReplaceConditionalWithPolymorphism extends PHPUnit_Framework_TestCase
 
 abstract class Addressable
 {
-    public function render($template)
-    {
-        if ($this instanceof User)
-        {
-            return sprintf($template, $this->getName(), $this->getName());
-        }
-        if ($this instanceof Brand)
-        {
-            return sprintf($template, $this->getUrl(), $this->getName());
-        }
-    }
+    public abstract function render($template);
 }
 
 class User extends Addressable
