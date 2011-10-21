@@ -14,7 +14,22 @@ class ReplaceConditionalWithPolymorphism extends PHPUnit_Framework_TestCase
     }
 }
 
-class User 
+abstract class Addressable
+{
+    public function render($template)
+    {
+        if ($this instanceof User)
+        {
+            return sprintf($template, $this->getName(), $this->getName());
+        }
+        if ($this instanceof Brand)
+        {
+            return sprintf($template, $this->getUrl(), $this->getName());
+        }
+    }
+}
+
+class User extends Addressable
 {
     private $name;
 
@@ -27,9 +42,21 @@ class User
     {
         return $this->name;
     }
+
+    public function render($template)
+    {
+        if ($this instanceof User)
+        {
+            return sprintf($template, $this->getName(), $this->getName());
+        }
+        if ($this instanceof Brand)
+        {
+            return sprintf($template, $this->getUrl(), $this->getName());
+        }
+    }
 }
 
-class Brand 
+class Brand extends Addressable
 {
     private $name;
     private $url;
@@ -49,6 +76,18 @@ class Brand
     {
         return $this->url;
     }
+
+    public function render($template)
+    {
+        if ($this instanceof User)
+        {
+            return sprintf($template, $this->getName(), $this->getName());
+        }
+        if ($this instanceof Brand)
+        {
+            return sprintf($template, $this->getUrl(), $this->getName());
+        }
+    }
 }
 
 class Renderer
@@ -62,13 +101,6 @@ class Renderer
 
     public function __toString()
     {
-        if ($this->domainObject instanceof User)
-        {
-            return '<a href="/' . $this->domainObject->getName() . '">' . $this->domainObject->getName() . '</a>';
-        }
-        if ($this->domainObject instanceof Brand)
-        {
-            return '<a href="/' . $this->domainObject->getURL() . '">' . $this->domainObject->getName() . '</a>';
-        }
+        return $this->domainObject->render('<a href="/%s">%s</a>');
     }
 }
