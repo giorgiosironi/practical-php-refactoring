@@ -35,14 +35,7 @@ class User extends Addressable
 
     public function render($template)
     {
-        if ($this instanceof User)
-        {
-            return sprintf($template, $this->getName(), $this->getName());
-        }
-        if ($this instanceof Brand)
-        {
-            return sprintf($template, $this->getUrl(), $this->getName());
-        }
+        return sprintf($template, $this->getName(), $this->getName());
     }
 }
 
@@ -69,14 +62,7 @@ class Brand extends Addressable
 
     public function render($template)
     {
-        if ($this instanceof User)
-        {
-            return sprintf($template, $this->getName(), $this->getName());
-        }
-        if ($this instanceof Brand)
-        {
-            return sprintf($template, $this->getUrl(), $this->getName());
-        }
+        return sprintf($template, $this->getUrl(), $this->getName());
     }
 }
 
