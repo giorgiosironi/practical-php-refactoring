@@ -1,4 +1,9 @@
 <?php
+class AssertionException extends Exception {}
+assert_options(ASSERT_CALLBACK, function($file, $line, $message) {
+    throw new AssertionException($message);
+} );
+
 class IntroduceAssertion extends PHPUnit_Framework_TestCase
 {
     public function testTaxesAreAddedToTheNetPrice()
@@ -51,6 +56,7 @@ class Price
 
     public function value()
     {
+        assert('$this->taxRate >= 0');
         return $this->net * (1 + $this->taxRate / 100);
     }
 }
