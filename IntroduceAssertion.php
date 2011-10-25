@@ -16,6 +16,17 @@ class IntroduceAssertion extends PHPUnit_Framework_TestCase
         $price->lowerTaxRate();
         $this->assertEquals(1000, $price->value());
     }
+
+    public function testTaxesCannotBeLoweredBelowZeroForAValidPrice()
+    {
+        $price = new Price(1000);
+        $price->addTaxRate(20);
+        $price->lowerTaxRate();
+        $price->lowerTaxRate();
+        $price->lowerTaxRate();
+        $this->setExpectedException('AssertionException');
+        $price->value();
+    }
 }
 
 class Price
