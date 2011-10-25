@@ -1,8 +1,13 @@
 <?php
-class AssertionException extends Exception {}
-assert_options(ASSERT_CALLBACK, function($file, $line, $message) {
-    throw new AssertionException($message);
-} );
+class AssertionException extends Exception
+{
+    public static function throwIf($condition)
+    {
+        if ($condition) {
+            throw new self('Assertion failed.');
+        }
+    }
+}
 
 class IntroduceAssertion extends PHPUnit_Framework_TestCase
 {
@@ -56,7 +61,7 @@ class Price
 
     public function value()
     {
-        assert('$this->taxRate >= 0');
+        AssertionException::throwIf($this->taxRate < 0);
         return $this->net * (1 + $this->taxRate / 100);
     }
 }
