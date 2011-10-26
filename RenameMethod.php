@@ -15,4 +15,10 @@ class UserRepository
         // ...complex calculations...
         return 0;
     }
+
+    public function numberOfUsersWithoutAPublicProfile()
+    {
+        // ...complex calculations...
+        return 0;
+    }
 }
