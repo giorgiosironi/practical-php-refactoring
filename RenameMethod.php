@@ -10,11 +10,6 @@ class RenameMethod extends PHPUnit_Framework_TestCase
 
 class UserRepository
 {
-    public function snafucatedUsers()
-    {
-        return $this->numberOfUsersWithoutAPublicProfile();
-    }
-
     public function numberOfUsersWithoutAPublicProfile()
     {
         // ...complex calculations...
