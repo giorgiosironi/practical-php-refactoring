@@ -4,7 +4,7 @@ class RenameMethod extends PHPUnit_Framework_TestCase
     public function testSimulatesClientCode()
     {
         $repository = new UserRepository();
-        $this->assertEquals(0, $repository->snafucatedUsers());
+        $this->assertEquals(0, $repository->numberOfUsersWithoutAPublicProfile());
     }
 }
 
