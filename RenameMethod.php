@@ -12,8 +12,7 @@ class UserRepository
 {
     public function snafucatedUsers()
     {
-        // ...complex calculations...
-        return 0;
+        return $this->numberOfUsersWithoutAPublicProfile();
     }
 
     public function numberOfUsersWithoutAPublicProfile()
