@@ -23,12 +23,6 @@ class Invoices
         $this->invoiceDates = $invoiceDates;
     }
 
-    public function getNextProgressiveNumber()
-    {
-        $currentDate = date('Y-m-d');
-        return $this->getProgressiveNumberForInsertion($currentDate);
-    }
-
     public function getProgressiveNumberForInsertion($currentDate)
     {
         foreach ($this->invoiceDates as $number => $date) {
