@@ -4,13 +4,7 @@ class RemoveParameter extends PHPUnit_Framework_TestCase
     public function testProvidesNextInvoiceNumbersForTheCurrentDate()
     {
         $invoices = new Invoices(array(1 => '2011-10-01', 2 => '2011-11-01'));
-        $this->assertEquals(3, $invoices->getProgressiveNumberForInsertion('2011-11-02'));
-    }
-
-    public function testNextInvoiceNumberIsAnExistingOneInCaseWeHaveToRenumerate()
-    {
-        $invoices = new Invoices(array(1 => '2011-10-01', 2 => '2011-11-10'));
-        $this->assertEquals(2, $invoices->getProgressiveNumberForInsertion('2011-11-02'));
+        $this->assertEquals(3, $invoices->getProgressiveNumberForInsertion());
     }
 }
 
