@@ -25,15 +25,7 @@ class Invoices
 
     public function getProgressiveNumberForInsertion($currentDate)
     {
-        foreach ($this->invoiceDates as $number => $date) {
-            if ($date > $currentDate) {
-                $nextNumber = $number;
-                break;
-            }
-        }
-        if (!isset($nextNumber)) {
-            $nextNumber = count($this->invoiceDates) + 1;
-        }
+        $nextNumber = count($this->invoiceDates) + 1;
         return $nextNumber;
     }
 }
