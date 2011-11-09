@@ -23,7 +23,7 @@ class Invoices
         $this->invoiceDates = $invoiceDates;
     }
 
-    public function getProgressiveNumberForInsertion($currentDate)
+    public function getProgressiveNumberForInsertion()
     {
         $nextNumber = count($this->invoiceDates) + 1;
         return $nextNumber;
