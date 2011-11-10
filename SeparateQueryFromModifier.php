@@ -6,6 +6,14 @@ class SeparateQueryFromModifier extends PHPUnit_Framework_TestCase
         $user = new User('Giorgio', 'Sironi');
         $this->assertEquals('User: Giorgio Sironi', $user->__toString());
     }
+
+    public function testTheDomainObjectQueriesShouldNotModifyTheObservableStateOfTheObjectItself()
+    {
+        $user = new User('Giorgio', 'Sironi');
+        $oldFullName = $user->getFullName();
+        $user->__toString();
+        $this->assertEquals($oldFullName, $user->getFullName());
+    }
 }
 
 /**
