@@ -4,12 +4,14 @@ class SeparateQueryFromModifier extends PHPUnit_Framework_TestCase
     public function testTheDomainObjectProvidesACalculatedField()
     {
         $user = new User('Giorgio', 'Sironi');
+        $user->completeFields();
         $this->assertEquals('User: Giorgio Sironi', $user->__toString());
     }
 
     public function testTheDomainObjectQueriesShouldNotModifyTheObservableStateOfTheObjectItself()
     {
         $user = new User('Giorgio', 'Sironi');
+        $user->completeFields();
         $oldFullName = $user->getFullName();
         $user->__toString();
         $this->assertEquals($oldFullName, $user->getFullName());
@@ -44,9 +46,14 @@ class User
     public function getLastName() { return $this->lastName; }
     public function getFullName() { return $this->fullName; }
 
-    public function __toString()
+    public function completeFields()
     {
         $this->fullName = $this->firstName . ' ' . $this->lastName;
+        return $this->__toString();
+    }
+
+    public function __toString()
+    {
         return 'User: ' . $this->fullName;
     }
 }
