@@ -49,7 +49,6 @@ class User
     public function completeFields()
     {
         $this->fullName = $this->firstName . ' ' . $this->lastName;
-        return $this->__toString();
     }
 
     public function __toString()
