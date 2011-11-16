@@ -38,14 +38,4 @@ class Article
     {
         return $this->views >= $minimumViews;
     }
-
-    public function isPopular()
-    {
-        return $this->views >= 1000;
-    }
-
-    public function isTop()
-    {
-        return $this->views >= 10000;
-    }
 }
