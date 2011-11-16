@@ -4,13 +4,13 @@ class ParameterizeMethod extends PHPUnit_Framework_TestCase
     public function testTheArticleIsConsideredPopularAfter1000Views()
     {
         $article = new Article('PPR: Extract Method', 1000);
-        $this->assertTrue($article->isPopular());
+        $this->assertTrue($article->isEnoughPopular(Article::POPULAR));
     }
 
     public function testTheArticleIsConsideredInTheTopRankAfter10000Views()
     {
         $article = new Article('How to be a worse programmer', 10000);
-        $this->assertTrue($article->isTop());
+        $this->assertTrue($article->isEnoughPopular(Article::TOP));
     }
 
     public function testPopularityIsDecidedByAViewsParameter()
@@ -25,6 +25,8 @@ class Article
 {
     private $title;
     private $views;
+    const POPULAR = 1000;
+    const TOP = 10000;
 
     public function __construct($title, $views)
     {
