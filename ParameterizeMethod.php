@@ -32,6 +32,11 @@ class Article
         $this->views = $views;
     }
 
+    public function isEnoughPopular($minimumViews)
+    {
+        return $this->views >= $minimumViews;
+    }
+
     public function isPopular()
     {
         return $this->views >= 1000;
