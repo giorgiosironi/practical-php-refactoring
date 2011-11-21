@@ -4,7 +4,7 @@ class ReplaceParameterWithExplicitMethods extends PHPUnit_Framework_TestCase
     public function testThreadCanBeClosed()
     {
         $thread = new Thread('Ubuntu on EEE Pc');
-        $thread->setOpen(false);
+        $thread->close();
         $this->assertFalse($thread->getOpen());
         $this->assertEquals('[closed] Ubuntu on EEE Pc', $thread->__toString());
     }
@@ -12,7 +12,7 @@ class ReplaceParameterWithExplicitMethods extends PHPUnit_Framework_TestCase
     public function testThreadCanBeOpened()
     {
         $thread = new Thread('Ubuntu on EEE Pc');
-        $thread->setOpen(true);
+        $thread->open();
         $this->assertTrue($thread->getOpen());
         $this->assertEquals('Ubuntu on EEE Pc', $thread->__toString());
     }
