@@ -28,13 +28,12 @@ class Thread
         $this->title = $title;
     }
 
-    public function setOpen($state)
+    public function setOpen($open)
     {
-        $this->open = $state;
-        if (!$this->open) {
-            $this->label = '[closed] ' . $this->title;
+        if (!$open) {
+            $this->close();
         } else {
-            $this->label = $this->title;
+            $this->open();
         }
     }
 
