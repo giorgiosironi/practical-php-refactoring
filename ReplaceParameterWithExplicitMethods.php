@@ -38,6 +38,18 @@ class Thread
         }
     }
 
+    public function open()
+    {
+        $this->open = true;
+        $this->label = $this->title;
+    }
+
+    public function close()
+    {
+        $this->open = false;
+        $this->label = '[closed] ' . $this->title;
+    }
+
     public function getOpen()
     {
         return $this->open;
