@@ -28,15 +28,6 @@ class Thread
         $this->title = $title;
     }
 
-    public function setOpen($open)
-    {
-        if (!$open) {
-            $this->close();
-        } else {
-            $this->open();
-        }
-    }
-
     public function open()
     {
         $this->open = true;
