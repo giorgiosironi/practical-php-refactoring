@@ -15,7 +15,8 @@ class Question
 
     public function __construct($text, $responses = 0)
     {
-        $this->setText($text);
+        $text = trim($text);
+        $this->text = $text;
         $this->responses = $responses;
     }
 
