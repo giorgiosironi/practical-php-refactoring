@@ -35,7 +35,7 @@ class Thread
         $previousPost = null;
         $text = '';
         foreach ($this->posts as $post) {
-            $text .= $post->toString($previousPost);
+            $text .= $post->__toString();
             $text .= "\n";
             $previousPost = $post;
         }
@@ -58,7 +58,7 @@ class Post
         $this->origin = $post;
     }
 
-    public function toString(Post $previousPost = null) {
+    public function __toString() {
         if ($this->origin) {
             $text = '> In reply to: ' . $this->origin->text . "\n";
         } else {
