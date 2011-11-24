@@ -5,7 +5,7 @@ class IntroduceParameterObject extends PHPUnit_Framework_TestCase
     {
         $quotation = new Quotation();
         $quotation->addRow(1000);
-        $quotation->specifyTaxes(20, 'VATCODE');
+        $quotation->specifyTaxes(new VatRate(20, 'VATCODE'), 20, 'VATCODE');
         $this->assertEquals(1200, $quotation->getTotal());
         $this->assertEquals('Type: VATCODE', $quotation->getTypeOfService());
     }
@@ -14,6 +14,7 @@ class IntroduceParameterObject extends PHPUnit_Framework_TestCase
 class Quotation
 {
     private $netTotal = 0;
+    private $vatRate;
     private $vatPercentage;
     private $vatCode;
 
@@ -23,8 +24,9 @@ class Quotation
         $this->netTotal += $row;
     }
 
-    public function specifyTaxes($percentage, $code)
+    public function specifyTaxes(VatRate $vatRate, $percentage, $code)
     {
+        $this->vatRate = $vatRate;
         $this->vatPercentage = $percentage;
         $this->vatCode = $code;
     }
