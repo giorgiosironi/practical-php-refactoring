@@ -20,12 +20,6 @@ class Question
         $this->responses = $responses;
     }
 
-    public function setText($text)
-    {
-        $text = trim($text);
-        $this->text = $text;
-    }
-
     public function __toString()
     {
         return $this->text . ' (responses: ' . $this->responses . ')';
