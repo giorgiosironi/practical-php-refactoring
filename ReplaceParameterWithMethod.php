@@ -59,8 +59,8 @@ class Post
     }
 
     public function toString(Post $previousPost = null) {
-        if ($previousPost) {
-            $text = '> In reply to: ' . $previousPost->text . "\n";
+        if ($this->origin) {
+            $text = '> In reply to: ' . $this->origin->text . "\n";
         } else {
             $text = '';
         }
