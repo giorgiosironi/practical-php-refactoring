@@ -40,4 +40,24 @@ class Quotation
     }
 }
 
+class VatRate
+{
+    private $rate;
+    private $code;
 
+    public function __construct($rate, $code)
+    {
+        $this->rate = $rate;
+        $this->code = $code;
+    }
+
+    public function getRate()
+    {
+        return $this->rate;
+    }
+
+    public function getCode()
+    {
+        return $this->code;
+    }
+}
