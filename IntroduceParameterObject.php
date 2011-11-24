@@ -29,7 +29,7 @@ class Quotation
 
     public function getTotal()
     {
-        return $this->netTotal * (1 + $this->vatRate->getRate() / 100); 
+        return $this->vatRate->tax($this->netTotal);
     }
 
     public function getTypeOfService()
@@ -49,13 +49,13 @@ class VatRate
         $this->code = $code;
     }
 
-    public function getRate()
-    {
-        return $this->rate;
-    }
-
     public function getCode()
     {
         return $this->code;
+    }
+
+    public function tax($netAmount)
+    {
+        return $netAmount * (1 + $this->rate / 100); 
     }
 }
