@@ -9,7 +9,7 @@ class ReplaceConstructorWithFactoryMethod extends PHPUnit_Framework_TestCase
 
     public function testAnAreaIsCreatedAroundAPoint()
     {
-        $area = new Area(400, 500, 100);
+        $area = Area::fromCenterAndDimension(400, 500, 100);
         $this->assertEquals(10000, $area->measure());
     }
 }
@@ -40,6 +40,11 @@ class Area
     public static function fromXYtoXY($first_x, $first_y, $second_x, $second_y)
     {
         return new self($first_x, $first_y, $second_x, $second_y);
+    }
+
+    public static function fromCenterAndDimension($center_x, $center_y, $dimension)
+    {
+        return new self($center_x, $center_y, $dimension);
     }
 
     public function measure()
