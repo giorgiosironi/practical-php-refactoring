@@ -25,7 +25,7 @@ class BookInfo
         return "<li>$this->title $authorInfo</li>";
     }
 
-    public function authorHtml()
+    private function authorHtml()
     {
         return "<em>($this->author)</em>";
     }
