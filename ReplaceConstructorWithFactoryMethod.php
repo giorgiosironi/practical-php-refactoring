@@ -21,7 +21,7 @@ class Area
     private $second_corner_x;
     private $second_corner_y;
 
-    public function __construct($first_x, $first_y, $second_x, $second_y)
+    private function __construct($first_x, $first_y, $second_x, $second_y)
     {
         $this->first_corner_x = $first_x;
         $this->first_corner_y = $first_y;
