@@ -3,7 +3,7 @@ class ReplaceConstructorWithFactoryMethod extends PHPUnit_Framework_TestCase
 {
     public function testAnAreaIsCreatedGivenTheTwoOppositeCorners()
     {
-        $area = new Area(1, 11, 100, 210);
+        $area = Area::fromXYtoXY(1, 11, 100, 210);
         $this->assertEquals(20000, $area->measure());
     }
 
@@ -35,6 +35,11 @@ class Area
             $this->second_corner_x = $second_x;
             $this->second_corner_y = $second_y;
         }
+    }
+
+    public static function fromXYtoXY($first_x, $first_y, $second_x, $second_y)
+    {
+        return new self($first_x, $first_y, $second_x, $second_y);
     }
 
     public function measure()
