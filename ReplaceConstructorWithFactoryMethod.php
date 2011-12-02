@@ -21,20 +21,12 @@ class Area
     private $second_corner_x;
     private $second_corner_y;
 
-    public function __construct($first_x, $first_y, $second_x, $second_y = null)
+    public function __construct($first_x, $first_y, $second_x, $second_y)
     {
-        if ($second_y === null) {
-            $size = $second_x;
-            $this->first_corner_x = $first_x - $size / 2 + 1;
-            $this->first_corner_y = $first_y - $size / 2 + 1;
-            $this->second_corner_x = $first_x + $size / 2;
-            $this->second_corner_y = $first_y + $size / 2;
-        } else {
-            $this->first_corner_x = $first_x;
-            $this->first_corner_y = $first_y;
-            $this->second_corner_x = $second_x;
-            $this->second_corner_y = $second_y;
-        }
+        $this->first_corner_x = $first_x;
+        $this->first_corner_y = $first_y;
+        $this->second_corner_x = $second_x;
+        $this->second_corner_y = $second_y;
     }
 
     public static function fromXYtoXY($first_x, $first_y, $second_x, $second_y)
@@ -44,7 +36,11 @@ class Area
 
     public static function fromCenterAndDimension($center_x, $center_y, $dimension)
     {
-        return new self($center_x, $center_y, $dimension);
+        $first_x = $center_x - $dimension / 2 + 1;
+        $first_y = $center_y - $dimension / 2 + 1;
+        $second_x = $center_x + $dimension / 2;
+        $second_y = $center_y + $dimension / 2;
+        return new self($first_x, $first_y, $second_x, $second_y);
     }
 
     public function measure()
