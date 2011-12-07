@@ -4,7 +4,7 @@ class EncapsulateDowncast extends PHPUnit_Framework_TestCase
     public function test()
     {
         $plate = new Plate('AB123XY');
-        $newPlate = new Plate($plate->next());
+        $newPlate = $plate->next();
         $this->assertEquals(new Plate('AB123XZ'), $newPlate);
     }
 }
@@ -19,7 +19,7 @@ class Plate
     }
 
     /**
-     * @return string
+     * @return Plate
      */
     public function next()
     {
@@ -27,6 +27,6 @@ class Plate
         $lastLetter = substr($this->value, -1);
         $lastLetter++;
         $nextValue = substr_replace($this->value, $lastLetter, -1);
-        return $nextValue;
+        return new self($nextValue);
     }
 }
