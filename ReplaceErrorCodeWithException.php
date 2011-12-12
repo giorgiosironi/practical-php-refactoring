@@ -39,7 +39,7 @@ class Bag
     public function addItem($name, $itemWeight)
     {
         if ($this->weightLimit < $this->weight + $itemWeight) {
-            return self::TOO_MUCH_WEIGHT;
+            throw new TooMuchWeightException("Weight has exceeded the limit for this Bag: $this->weightLimit");
         }
         $this->weight += $itemWeight;
         return 0;
@@ -50,3 +50,5 @@ class Bag
         return $this->weight;
     }
 }
+
+class TooMuchWeightException extends Exception {}
