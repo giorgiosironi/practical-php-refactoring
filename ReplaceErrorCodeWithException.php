@@ -25,8 +25,6 @@ class Bag
     private $weightLimit;
     private $weight;
 
-    const TOO_MUCH_WEIGHT = 1;
-
     public function __construct($weightLimit)
     {
         $this->weightLimit = $weightLimit;
@@ -34,7 +32,7 @@ class Bag
     }
 
     /**
-     * @return int  0 if no errors
+     * @throws TooMuchWeightException
      */
     public function addItem($name, $itemWeight)
     {
