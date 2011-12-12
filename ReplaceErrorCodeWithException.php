@@ -5,16 +5,18 @@ class ReplaceErrorCodeWithException extends PHPUnit_Framework_TestCase
     {
         $bag = new Bag(10);
         $result = $bag->addItem('Domain-Driven Design', 10);
-        $this->assertEquals(0, $result);
         $this->assertEquals(10, $bag->getWeight());
     }
 
     public function testTheWeightLimitCannotBeInfringed()
     {
         $bag = new Bag(10);
-        $result = $bag->addItem('Land of Lisp', 11);
-        $this->assertEquals(Bag::TOO_MUCH_WEIGHT, $result);
-        $this->assertEquals(0, $bag->getWeight());
+        try {
+            $result = $bag->addItem('Land of Lisp', 11);
+            $this->fail('Adding the item should not be allowed.');
+        } catch (TooMuchWeightException $e) {
+            $this->assertEquals(0, $bag->getWeight());
+        }
     }
 }
 
