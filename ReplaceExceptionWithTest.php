@@ -24,7 +24,7 @@ class Database
         try {
             $this->connection = new PDO($dsn);
         } catch (PDOException $e) {
-            throw new DatabaseException("The connection was not successful: check the configuration (dsn: '$dsn').");
+            throw Exception();
         }
     }
 }
