@@ -21,11 +21,7 @@ class Database
         if (!in_array($driver, $this->supportedDrivers)) {
             throw new DatabaseException("The connection was not successful: check the configuration (dsn: '$dsn').");
         }
-        try {
-            $this->connection = new PDO($dsn);
-        } catch (PDOException $e) {
-            throw Exception();
-        }
+        $this->connection = new PDO($dsn);
     }
 }
 
