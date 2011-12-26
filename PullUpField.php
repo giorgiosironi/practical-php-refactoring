@@ -18,6 +18,10 @@ class PullUpField extends PHPUnit_Framework_TestCase
 
 abstract class NewsFeedItem
 {
+    /**
+     * @var string  references the author's Twitter username
+     */
+    protected $author;
 }
 
 class Post extends NewsFeedItem
