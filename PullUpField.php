@@ -27,7 +27,6 @@ abstract class NewsFeedItem
 class Post extends NewsFeedItem
 {
     private $text;
-    private $author;
 
     public function __construct($text, $author)
     {
@@ -44,7 +43,6 @@ class Post extends NewsFeedItem
 class Link extends NewsFeedItem
 {
     private $url;
-    private $author;
 
     public function __construct($url, $author)
     {
