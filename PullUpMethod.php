@@ -51,11 +51,6 @@ class Post extends NewsFeedItem
     {
         return $this->text;
     }
-
-    public function __toString()
-    {
-        return $this->displayedText() . " -- $this->author";
-    }
 }
 
 class Link extends NewsFeedItem
