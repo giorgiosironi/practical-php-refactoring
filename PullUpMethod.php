@@ -22,6 +22,19 @@ abstract class NewsFeedItem
      * @var string  references the author's Twitter username
      */
     protected $author;
+
+    /**
+     * @return string   an HTML printable version
+     */
+    public function __toString()
+    {
+        return $this->displayedText() . " -- $this->author";
+    }
+
+    /**
+     * @return string
+     */
+    protected abstract function displayedText();
 }
 
 class Post extends NewsFeedItem
@@ -34,7 +47,7 @@ class Post extends NewsFeedItem
         $this->author = $author;
     }
 
-    private function displayedText()
+    protected function displayedText()
     {
         return $this->text;
     }
@@ -55,7 +68,7 @@ class Link extends NewsFeedItem
         $this->author = $author;
     }
 
-    private function displayedText()
+    protected function displayedText()
     {
         return "<a href=\"$this->url\">$this->url</a>";
     }
