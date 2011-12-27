@@ -34,9 +34,14 @@ class Post extends NewsFeedItem
         $this->author = $author;
     }
 
+    private function displayedText()
+    {
+        return $this->text;
+    }
+
     public function __toString()
     {
-        return "$this->text -- $this->author";
+        return $this->displayedText() . " -- $this->author";
     }
 }
 
@@ -50,8 +55,13 @@ class Link extends NewsFeedItem
         $this->author = $author;
     }
 
+    private function displayedText()
+    {
+        return "<a href=\"$this->url\">$this->url</a>";
+    }
+
     public function __toString()
     {
-        return "<a href=\"$this->url\">$this->url</a> -- $this->author";
+        return $this->displayedText() . " -- $this->author";
     }
 }
