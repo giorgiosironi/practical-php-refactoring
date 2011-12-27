@@ -67,9 +67,4 @@ class Link extends NewsFeedItem
     {
         return "<a href=\"$this->url\">$this->url</a>";
     }
-
-    public function __toString()
-    {
-        return $this->displayedText() . " -- $this->author";
-    }
 }
