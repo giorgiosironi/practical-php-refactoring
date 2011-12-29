@@ -48,6 +48,7 @@ class Post extends NewsFeedItem
 
     public function __construct($text, $author)
     {
+        parent::__construct($author);
         $this->text = $text;
     }
 
@@ -63,6 +64,7 @@ class Link extends NewsFeedItem
 
     public function __construct($url, $author)
     {
+        parent::__construct($author);
         $this->url = $url;
     }
 
