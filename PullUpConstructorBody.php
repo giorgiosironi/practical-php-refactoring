@@ -23,6 +23,10 @@ abstract class NewsFeedItem
      */
     protected $author;
 
+    public function __construct()
+    {
+    }
+
     /**
      * @return string   an HTML printable version
      */
