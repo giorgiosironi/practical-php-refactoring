@@ -23,8 +23,9 @@ abstract class NewsFeedItem
      */
     protected $author;
 
-    public function __construct()
+    public function __construct($author)
     {
+        $this->author = '@' . ltrim($author, '@');
     }
 
     /**
@@ -48,7 +49,6 @@ class Post extends NewsFeedItem
     public function __construct($text, $author)
     {
         $this->text = $text;
-        $this->author = '@' . ltrim($author, '@');
     }
 
     protected function displayedText()
@@ -64,7 +64,6 @@ class Link extends NewsFeedItem
     public function __construct($url, $author)
     {
         $this->url = $url;
-        $this->author = '@' . ltrim($author, '@');
     }
 
     protected function displayedText()
