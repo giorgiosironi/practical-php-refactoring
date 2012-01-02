@@ -71,6 +71,13 @@ class Post extends NewsFeedItem
     {
         return $this->text;
     }
+
+    protected function checkLocality($url)
+    {
+        if (strstr($url, "http") == $url) {
+            throw new InvalidArgumentException("The URL '$url' is related to an external website.");
+        }
+    }
 }
 
 class Link extends NewsFeedItem
@@ -87,5 +94,12 @@ class Link extends NewsFeedItem
     protected function displayedText()
     {
         return "<a href=\"$this->url\">$this->url</a>";
+    }
+
+    protected function checkLocality($url)
+    {
+        if (strstr($url, "http") == $url) {
+            throw new InvalidArgumentException("The URL '$url' is related to an external website.");
+        }
     }
 }
