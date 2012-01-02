@@ -36,13 +36,6 @@ abstract class NewsFeedItem
         $this->author = '@' . ltrim($author, '@');
     }
 
-    protected function checkLocality($url)
-    {
-        if (strstr($url, "http") == $url) {
-            throw new InvalidArgumentException("The URL '$url' is related to an external website.");
-        }
-    }
-
     /**
      * @return string   an HTML printable version
      */
