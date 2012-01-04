@@ -23,11 +23,6 @@ abstract class NewsFeedItem
      */
     protected $author;
 
-    /**
-     * @var string
-     */
-    protected $url;
-
     public function __construct($author)
     {
         $this->author = '@' . ltrim($author, '@');
