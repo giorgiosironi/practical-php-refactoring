@@ -46,11 +46,6 @@ class Post extends NewsFeedItem
 {
     private $text;
 
-    /**
-     * @var string
-     */
-    protected $url;
-
     public function __construct($text, $author)
     {
         parent::__construct($author);
