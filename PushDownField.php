@@ -51,6 +51,11 @@ class Post extends NewsFeedItem
 {
     private $text;
 
+    /**
+     * @var string
+     */
+    protected $url;
+
     public function __construct($text, $author)
     {
         parent::__construct($author);
@@ -65,6 +70,11 @@ class Post extends NewsFeedItem
 
 class Link extends NewsFeedItem
 {
+    /**
+     * @var string
+     */
+    protected $url;
+
     public function __construct($url, $author)
     {
         parent::__construct($author);
