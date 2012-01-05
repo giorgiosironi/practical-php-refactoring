@@ -10,7 +10,7 @@ class ExtractSubclass extends PHPUnit_Framework_TestCase
 
     public function testALinkShowsItsAuthor()
     {
-        $link = new NewsFeedItem("/posts/php-refactoring", "giorgiosironi");
+        $link = new Link("/posts/php-refactoring", "giorgiosironi");
         $this->assertEquals("<a href=\"/posts/php-refactoring\">/posts/php-refactoring</a> -- @giorgiosironi",
                             $link->toHtml());
     }
