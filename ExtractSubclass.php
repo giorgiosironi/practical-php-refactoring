@@ -34,13 +34,12 @@ class NewsFeedItem
     {
         return "$this->content -- $this->author";
     }
-
-    public function toHtml()
-    {
-        return "<a href=\"$this->content\">$this->content</a> -- $this->author";
-    }
 }
 
 class Link extends NewsFeedItem
 {
+    public function toHtml()
+    {
+        return "<a href=\"$this->content\">$this->content</a> -- $this->author";
+    }
 }
