@@ -40,3 +40,7 @@ class NewsFeedItem
         return "<a href=\"$this->content\">$this->content</a> -- $this->author";
     }
 }
+
+class Link extends NewsFeedItem
+{
+}
