@@ -18,40 +18,37 @@ class ExtractSuperclass extends PHPUnit_Framework_TestCase
 
 abstract class ParagraphBox
 {
+    protected $content;
+
+    public function __construct($content)
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * @return string
+     */
+    abstract protected function displayContent();
+
+    public function toHtml()
+    {
+        return "<p>" . $this->displayContent() . "</p>";
+    }
 }
 
 class Post extends ParagraphBox
 {
-    public function __construct($content)
-    {
-        $this->content = $content;
-    }
-
-    private function displayContent()
+    protected function displayContent()
     {
         return $this->content;
     }
 
-    public function toHtml()
-    {
-        return "<p>" . $this->displayContent() . "</p>";
-    }
 }
 
 class Link extends ParagraphBox
 {
-    public function __construct($content)
-    {
-        $this->content = $content;
-    }
-
-    private function displayContent()
+    protected function displayContent()
     {
         return "<a href=\"$this->content\">$this->content</a>";
-    }
-
-    public function toHtml()
-    {
-        return "<p>" . $this->displayContent() . "</p>";
     }
 }
