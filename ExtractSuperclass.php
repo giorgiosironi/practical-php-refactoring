@@ -23,9 +23,14 @@ class Post
         $this->content = $content;
     }
 
+    private function displayContent()
+    {
+        return $this->content;
+    }
+
     public function toHtml()
     {
-        return "<p>" . $this->content . "</p>";
+        return "<p>" . $this->displayContent() . "</p>";
     }
 }
 
@@ -36,8 +41,13 @@ class Link
         $this->content = $content;
     }
 
+    private function displayContent()
+    {
+        return "<a href=\"$this->content\">$this->content</a>";
+    }
+
     public function toHtml()
     {
-        return "<p><a href=\"" . $this->content . "\">" . $this->content . "</a></p>";
+        return "<p>" . $this->displayContent() . "</p>";
     }
 }
