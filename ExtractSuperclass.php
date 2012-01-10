@@ -16,7 +16,11 @@ class ExtractSuperclass extends PHPUnit_Framework_TestCase
     }
 }
 
-class Post
+abstract class ParagraphBox
+{
+}
+
+class Post extends ParagraphBox
 {
     public function __construct($content)
     {
@@ -34,7 +38,7 @@ class Post
     }
 }
 
-class Link
+class Link extends ParagraphBox
 {
     public function __construct($content)
     {
