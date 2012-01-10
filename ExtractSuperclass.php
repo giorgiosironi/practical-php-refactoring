@@ -18,26 +18,26 @@ class ExtractSuperclass extends PHPUnit_Framework_TestCase
 
 class Post
 {
-    public function __construct($text)
+    public function __construct($content)
     {
-        $this->text = $text;
+        $this->content = $content;
     }
 
     public function toHtml()
     {
-        return "<p>" . $this->text . "</p>";
+        return "<p>" . $this->content . "</p>";
     }
 }
 
 class Link
 {
-    public function __construct($href)
+    public function __construct($content)
     {
-        $this->href = $href;
+        $this->content = $content;
     }
 
     public function toHtml()
     {
-        return "<p><a href=\"" . $this->href . "\">" . $this->href . "</a></p>";
+        return "<p><a href=\"" . $this->content . "\">" . $this->content . "</a></p>";
     }
 }
