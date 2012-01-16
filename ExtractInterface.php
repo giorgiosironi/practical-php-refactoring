@@ -9,6 +9,14 @@ class ExtractInterface extends PHPUnit_Framework_TestCase
     }
 }
 
+interface Locale
+{
+    /**
+     * @return string
+     */
+    public function format($amount);
+}
+
 class EuroLocale
 {
     public function format($amount)
