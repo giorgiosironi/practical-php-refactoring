@@ -17,7 +17,7 @@ interface Locale
     public function format($amount);
 }
 
-class EuroLocale
+class EuroLocale implements Locale
 {
     public function format($amount)
     {
