@@ -37,7 +37,7 @@ class Money
         $this->amount = $amount;
     }
 
-    public function display(EuroLocale $locale)
+    public function display(Locale $locale)
     {
         return $locale->format($this->amount);
     }
