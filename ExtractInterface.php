@@ -1,11 +1,18 @@
 <?php
 class ExtractInterface extends PHPUnit_Framework_TestCase
 {
-    public function testShouldDisplayAMoneyAmount()
+    public function testShouldFormatItsAmountBeforeDisplayingIt()
+    {
+        $locale = $this->getMock('Locale');
+        $locale->expects($this->once())->method('format')->with("42")->will($this->returnValue('42 SIMBOL'));
+        $money = new Money("42");
+        $this->assertEquals("42 SIMBOL", $money->display($locale));
+    }
+
+    public function testShouldFormatAnAmountWithTheEuroSighn()
     {
         $locale = new EuroLocale();
-        $money = new Money("42");
-        $this->assertEquals("42 &euro;", $money->display($locale));
+        $this->assertEquals("42 &euro;", $locale->format("42"));
     }
 }
 
