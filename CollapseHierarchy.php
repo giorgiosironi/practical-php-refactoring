@@ -9,11 +9,7 @@ class CollapseHierarchy extends PHPUnit_Framework_TestCase
     }
 }
 
-class NewsFeedItem
-{
-}
-
-class Link extends NewsFeedItem
+class Link
 {
     protected $content;
     protected $author;
