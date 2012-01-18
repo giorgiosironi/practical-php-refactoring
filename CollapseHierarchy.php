@@ -11,6 +11,10 @@ class CollapseHierarchy extends PHPUnit_Framework_TestCase
 
 class NewsFeedItem
 {
+}
+
+class Link extends NewsFeedItem
+{
     protected $content;
     protected $author;
 
@@ -27,10 +31,6 @@ class NewsFeedItem
     {
         return "$this->content -- $this->author";
     }
-}
-
-class Link extends NewsFeedItem
-{
     public function toHtml()
     {
         return "<a href=\"$this->content\">$this->content</a> -- $this->author";
