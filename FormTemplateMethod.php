@@ -32,7 +32,12 @@ class VideoTweet extends Tweet
 {
     public function __toString()
     {
-        return "Check out this video: $this->title $this->url";
+        return $this->prefix() . ": $this->title $this->url";
+    }
+
+    protected function prefix()
+    {
+        return "Check out this video";
     }
 }
 
@@ -40,6 +45,11 @@ class ArticleTweet extends Tweet
 {
     public function __toString()
     {
-        return "RT @DZone: $this->title $this->url";
+        return $this->prefix() . ": $this->title $this->url";
+    }
+
+    protected function prefix()
+    {
+        return "RT @DZone";
     }
 }
