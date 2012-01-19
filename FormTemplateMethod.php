@@ -16,34 +16,28 @@ class FormTemplateMethod extends PHPUnit_Framework_TestCase
     }
 }
 
-class VideoTweet
+class Tweet
 {
-    private $url;
-    private $title;
+    protected $url;
+    protected $title;
 
     public function __construct($url, $title)
     {
         $this->url = $url;
         $this->title = $title;
     }
+}
 
+class VideoTweet extends Tweet
+{
     public function __toString()
     {
         return "Check out this video: $this->title $this->url";
     }
 }
 
-class ArticleTweet
+class ArticleTweet extends Tweet
 {
-    private $url;
-    private $title;
-
-    public function __construct($url, $title)
-    {
-        $this->url = $url;
-        $this->title = $title;
-    }
-
     public function __toString()
     {
         return "RT @DZone: $this->title $this->url";
