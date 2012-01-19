@@ -16,7 +16,7 @@ class FormTemplateMethod extends PHPUnit_Framework_TestCase
     }
 }
 
-class Tweet
+abstract class Tweet
 {
     protected $url;
     protected $title;
@@ -31,6 +31,11 @@ class Tweet
     {
         return $this->prefix() . ": $this->title $this->url";
     }
+
+    /**
+     * @return string
+     */
+    protected abstract function prefix();
 }
 
 class VideoTweet extends Tweet
