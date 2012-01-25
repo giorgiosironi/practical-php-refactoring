@@ -16,7 +16,7 @@ class ReplaceDelegationWithInheritance extends PHPUnit_Framework_TestCase
     }
 }
 
-class TextSignedByAuthorFormat
+class FeedItem
 {
     private $text;
     private $author;
@@ -33,9 +33,9 @@ class TextSignedByAuthorFormat
     }
 }
 
-class Post extends TextSignedByAuthorFormat {}
+class Post extends FeedItem {}
 
-class Link extends TextSignedByAuthorFormat
+class Link extends FeedItem
 {
     public function __construct($url, $author)
     {
