@@ -61,7 +61,7 @@ class Post extends NewsFeedItem
 
     public function __toString()
     {
-        return parent::__toString();
+        return $this->format->display($this->displayedText(), $this->author);
     }
 }
 
@@ -84,7 +84,7 @@ class Link extends NewsFeedItem
 
     public function __toString()
     {
-        return parent::__toString();
+        return $this->format->display($this->displayedText(), $this->author);
     }
 }
 
