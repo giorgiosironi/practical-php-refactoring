@@ -33,20 +33,10 @@ class TextSignedByAuthorFormat
     }
 }
 
-class Post extends TextSignedByAuthorFormat
-{
-    private $format;
-
-    public function __construct($text, $author)
-    {
-        parent::__construct($text, $author);
-    }
-}
+class Post extends TextSignedByAuthorFormat {}
 
 class Link extends TextSignedByAuthorFormat
 {
-    private $format;
-
     public function __construct($url, $author)
     {
         parent::__construct($this->displayedText($url), $author);
