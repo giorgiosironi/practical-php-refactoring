@@ -16,13 +16,8 @@ class ReplaceInheritanceWithDelegation extends PHPUnit_Framework_TestCase
     }
 }
 
-abstract class NewsFeedItem
+class TextSignedByAuthorFormat
 {
-    /**
-     * @var string  references the author's Twitter username
-     */
-    protected $author;
-
     /**
      * @return string   an HTML printable version
      */
@@ -35,23 +30,19 @@ abstract class NewsFeedItem
     {
         return "$text -- $author";
     }
-
-    /**
-     * @return string
-     */
-    protected abstract function displayedText();
 }
 
-class Post extends NewsFeedItem
+class Post
 {
     private $text;
+    private $author;
     private $format;
 
     public function __construct($text, $author)
     {
         $this->text = $text;
         $this->author = $author;
-        $this->format = $this;
+        $this->format = new TextSignedByAuthorFormat();
     }
 
     protected function displayedText()
@@ -65,16 +56,17 @@ class Post extends NewsFeedItem
     }
 }
 
-class Link extends NewsFeedItem
+class Link
 {
     private $url;
+    private $author;
     private $format;
 
     public function __construct($url, $author)
     {
         $this->url = $url;
         $this->author = $author;
-        $this->format = $this;
+        $this->format = new TextSignedByAuthorFormat();
     }
 
     protected function displayedText()
