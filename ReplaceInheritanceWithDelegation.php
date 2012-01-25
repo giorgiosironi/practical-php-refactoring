@@ -18,14 +18,6 @@ class ReplaceInheritanceWithDelegation extends PHPUnit_Framework_TestCase
 
 class TextSignedByAuthorFormat
 {
-    /**
-     * @return string   an HTML printable version
-     */
-    public function __toString()
-    {
-        return $this->display($this->displayedText(), $this->author);
-    }
-
     public function display($text, $author)
     {
         return "$text -- $author";
@@ -45,14 +37,9 @@ class Post
         $this->format = new TextSignedByAuthorFormat();
     }
 
-    protected function displayedText()
-    {
-        return $this->text;
-    }
-
     public function __toString()
     {
-        return $this->format->display($this->displayedText(), $this->author);
+        return $this->format->display($this->text, $this->author);
     }
 }
 
