@@ -39,12 +39,7 @@ class Post extends TextSignedByAuthorFormat
 
     public function __construct($text, $author)
     {
-        $this->format = new TextSignedByAuthorFormat($text, $author);
-    }
-
-    public function __toString()
-    {
-        return $this->format->__toString();
+        parent::__construct($text, $author);
     }
 }
 
@@ -54,16 +49,11 @@ class Link extends TextSignedByAuthorFormat
 
     public function __construct($url, $author)
     {
-        $this->format = new TextSignedByAuthorFormat($this->displayedText($url), $author);
+        parent::__construct($this->displayedText($url), $author);
     }
 
     protected function displayedText($url)
     {
         return "<a href=\"$url\">$url</a>";
-    }
-
-    public function __toString()
-    {
-        return $this->format->__toString();
     }
 }
