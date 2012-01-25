@@ -28,7 +28,12 @@ abstract class NewsFeedItem
      */
     public function __toString()
     {
-        return $this->displayedText() . " -- $this->author";
+        return $this->display($this->displayedText(), $this->author);
+    }
+
+    public function display($text, $author)
+    {
+        return "$text -- $author";
     }
 
     /**
@@ -40,27 +45,36 @@ abstract class NewsFeedItem
 class Post extends NewsFeedItem
 {
     private $text;
+    private $format;
 
     public function __construct($text, $author)
     {
         $this->text = $text;
         $this->author = $author;
+        $this->format = $this;
     }
 
     protected function displayedText()
     {
         return $this->text;
     }
+
+    public function __toString()
+    {
+        return parent::__toString();
+    }
 }
 
 class Link extends NewsFeedItem
 {
     private $url;
+    private $format;
 
     public function __construct($url, $author)
     {
         $this->url = $url;
         $this->author = $author;
+        $this->format = $this;
     }
 
     protected function displayedText()
