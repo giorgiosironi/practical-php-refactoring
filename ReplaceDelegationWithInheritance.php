@@ -33,7 +33,7 @@ class TextSignedByAuthorFormat
     }
 }
 
-class Post
+class Post extends TextSignedByAuthorFormat
 {
     private $format;
 
@@ -48,7 +48,7 @@ class Post
     }
 }
 
-class Link
+class Link extends TextSignedByAuthorFormat
 {
     private $format;
 
