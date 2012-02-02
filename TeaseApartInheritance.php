@@ -3,7 +3,7 @@ class TeaseApartInheritance extends PHPUnit_Framework_TestCase
 {
     public function testAFacebookPostIsDisplayedWithTextAndLinkToTheAuthor()
     {
-        $post = new FacebookPost("Enjoy!", new FacebookSource("PHP-Cola"));
+        $post = new Post("Enjoy!", new FacebookSource("PHP-Cola"));
         $this->assertEquals("<p>Enjoy!"
                           . " -- <a href=\"http://facebook.com/PHP-Cola\">PHP-Cola</a></p>",
                             $post->__toString());
@@ -11,7 +11,7 @@ class TeaseApartInheritance extends PHPUnit_Framework_TestCase
 
     public function testAFacebookLinkIsDisplayedWithTargetAndLinkToTheAuthor()
     {
-        $link = new FacebookLink("Our new ad", "http://youtube.com/...", new FacebookSource("PHP-Cola"));
+        $link = new Link("Our new ad", "http://youtube.com/...", new FacebookSource("PHP-Cola"));
         $this->assertEquals("<p><a href=\"http://youtube.com/...\">Our new ad</a>"
                           . " -- <a href=\"http://facebook.com/PHP-Cola\">PHP-Cola</a></p>",
                             $link->__toString());
@@ -19,7 +19,7 @@ class TeaseApartInheritance extends PHPUnit_Framework_TestCase
 
     public function testATwitterLinkIsDisplayedWithTargetAndLinkToTheAuthor()
     {
-        $link = new TwitterLink("Our new ad", "http://youtube.com/...", new TwitterSource("giorgiosironi"));
+        $link = new Link("Our new ad", "http://youtube.com/...", new TwitterSource("giorgiosironi"));
         $this->assertEquals("<p><a href=\"http://youtube.com/...\">Our new ad</a>"
                           . " -- <a href=\"http://twitter.com/giorgiosironi\">@giorgiosironi</a></p>",
                             $link->__toString());
@@ -72,7 +72,7 @@ class TwitterSource extends Source
     }
 }
 
-abstract class Post extends NewsFeedItem
+class Post extends NewsFeedItem
 {
     private $content;
 
@@ -88,7 +88,7 @@ abstract class Post extends NewsFeedItem
     }
 }
 
-abstract class Link extends NewsFeedItem
+class Link extends NewsFeedItem
 {
     private $url;
     private $linkText;
@@ -104,16 +104,4 @@ abstract class Link extends NewsFeedItem
     {
         return "<a href=\"$this->url\">$this->linkText</a>";
     }
-}
-
-class FacebookPost extends Post
-{
-}
-
-class TwitterLink extends Link
-{
-}
-
-class FacebookLink extends Link
-{
 }
