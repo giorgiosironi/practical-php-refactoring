@@ -61,6 +61,20 @@ abstract class Source
     public abstract function authorLink();
 }
 
+class FacebookSource extends Source
+{
+    public function authorLink()
+    {
+    }
+}
+
+class TwitterSource extends Source
+{
+    public function authorLink()
+    {
+    }
+}
+
 abstract class Post extends NewsFeedItem
 {
     private $content;
@@ -69,6 +83,7 @@ abstract class Post extends NewsFeedItem
     {
         $this->content = $content;
         $this->author = $author;
+        $this->init();
     }
 
     protected function content()
@@ -87,6 +102,7 @@ abstract class Link extends NewsFeedItem
         $this->linkText = $linkText;
         $this->url = $url;
         $this->author = $author;
+        $this->init();
     }
 
     protected function content()
@@ -97,6 +113,8 @@ abstract class Link extends NewsFeedItem
 
 class FacebookPost extends Post
 {
+    public function init() { $this->source = new FacebookSource($this->author); }
+
     protected function authorLink()
     {
         return "<a href=\"http://facebook.com/$this->author\">$this->author</a>";
@@ -105,6 +123,8 @@ class FacebookPost extends Post
 
 class TwitterLink extends Link
 {
+    public function init() { $this->source = new TwitterSource($this->author); }
+
     protected function authorLink()
     {
         return "<a href=\"http://twitter.com/$this->author\">@$this->author</a>";
@@ -113,6 +133,8 @@ class TwitterLink extends Link
 
 class FacebookLink extends Link
 {
+    public function init() { $this->source = new FacebookSource($this->author); }
+
     protected function authorLink()
     {
         return "<a href=\"http://facebook.com/$this->author\">$this->author</a>";
