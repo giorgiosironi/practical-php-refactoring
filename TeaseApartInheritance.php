@@ -29,6 +29,7 @@ class TeaseApartInheritance extends PHPUnit_Framework_TestCase
 abstract class NewsFeedItem
 {
     protected $author;
+    protected $source;
 
     public function __toString()
     {
@@ -48,6 +49,16 @@ abstract class NewsFeedItem
      * @return string
      */
     protected abstract function authorLink();
+}
+
+abstract class Source
+{
+    public function __construct($author)
+    {
+        $this->author = $author;
+    }
+
+    public abstract function authorLink();
 }
 
 abstract class Post extends NewsFeedItem
