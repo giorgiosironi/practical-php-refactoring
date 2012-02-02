@@ -3,7 +3,7 @@ class TeaseApartInheritance extends PHPUnit_Framework_TestCase
 {
     public function testAFacebookPostIsDisplayedWithTextAndLinkToTheAuthor()
     {
-        $post = new FacebookPost("Enjoy!", "PHP-Cola");
+        $post = new FacebookPost("Enjoy!", new FacebookSource("PHP-Cola"));
         $this->assertEquals("<p>Enjoy!"
                           . " -- <a href=\"http://facebook.com/PHP-Cola\">PHP-Cola</a></p>",
                             $post->__toString());
@@ -11,7 +11,7 @@ class TeaseApartInheritance extends PHPUnit_Framework_TestCase
 
     public function testAFacebookLinkIsDisplayedWithTargetAndLinkToTheAuthor()
     {
-        $link = new FacebookLink("Our new ad", "http://youtube.com/...", "PHP-Cola");
+        $link = new FacebookLink("Our new ad", "http://youtube.com/...", new FacebookSource("PHP-Cola"));
         $this->assertEquals("<p><a href=\"http://youtube.com/...\">Our new ad</a>"
                           . " -- <a href=\"http://facebook.com/PHP-Cola\">PHP-Cola</a></p>",
                             $link->__toString());
@@ -19,7 +19,7 @@ class TeaseApartInheritance extends PHPUnit_Framework_TestCase
 
     public function testATwitterLinkIsDisplayedWithTargetAndLinkToTheAuthor()
     {
-        $link = new TwitterLink("Our new ad", "http://youtube.com/...", "giorgiosironi");
+        $link = new TwitterLink("Our new ad", "http://youtube.com/...", new TwitterSource("giorgiosironi"));
         $this->assertEquals("<p><a href=\"http://youtube.com/...\">Our new ad</a>"
                           . " -- <a href=\"http://twitter.com/giorgiosironi\">@giorgiosironi</a></p>",
                             $link->__toString());
@@ -76,11 +76,10 @@ abstract class Post extends NewsFeedItem
 {
     private $content;
 
-    public function __construct($content, $author)
+    public function __construct($content, Source $source)
     {
         $this->content = $content;
-        $this->author = $author;
-        $this->init();
+        $this->source = $source;
     }
 
     protected function content()
@@ -94,12 +93,11 @@ abstract class Link extends NewsFeedItem
     private $url;
     private $linkText;
 
-    public function __construct($linkText, $url, $author)
+    public function __construct($linkText, $url, Source $source)
     {
         $this->linkText = $linkText;
         $this->url = $url;
-        $this->author = $author;
-        $this->init();
+        $this->source = $source;
     }
 
     protected function content()
@@ -110,15 +108,12 @@ abstract class Link extends NewsFeedItem
 
 class FacebookPost extends Post
 {
-    public function init() { $this->source = new FacebookSource($this->author); }
 }
 
 class TwitterLink extends Link
 {
-    public function init() { $this->source = new TwitterSource($this->author); }
 }
 
 class FacebookLink extends Link
 {
-    public function init() { $this->source = new FacebookSource($this->author); }
 }
