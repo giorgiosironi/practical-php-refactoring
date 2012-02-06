@@ -25,15 +25,9 @@ class Invoice
     {
         $total = 0;
         foreach ($this->rows as $row) {
-            $total += $this->rowTotal($row);
+            $total += $row->total();
         }
         return $total;
-    }
-
-    public function rowTotal($row)
-    {
-        return $row->getNetPrice() 
-             + $row->getTaxRate() * $row->getNetPrice() / 100;
     }
 }
 
@@ -53,5 +47,11 @@ class Row
     public function getTaxRate()
     {
         return $this->taxRate;
+    }
+
+    public function total()
+    {
+        return $this->getNetPrice() 
+             + $this->getTaxRate() * $this->getNetPrice() / 100;
     }
 }
