@@ -39,19 +39,9 @@ class Row
         $this->taxRate = $taxRate;
     }
 
-    public function getNetPrice()
-    {
-        return $this->netPrice;
-    }
-
-    public function getTaxRate()
-    {
-        return $this->taxRate;
-    }
-
     public function total()
     {
-        return $this->getNetPrice() 
-             + $this->getTaxRate() * $this->getNetPrice() / 100;
+        return $this->netPrice 
+             + $this->taxRate * $this->netPrice / 100;
     }
 }
