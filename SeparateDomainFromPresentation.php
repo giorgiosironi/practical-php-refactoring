@@ -20,17 +20,30 @@ class Posts
         return $stmt->fetch();
     }
 }
+class LastPostAction
+{
+    public function __construct(Posts $posts, $template)
+    {
+        $this->posts = $posts;
+        $this->template = $template;
+    }
+
+    public function execute(array $getParameters)
+    {
+        if (!isset($getParameters['last_visit'])) {
+            $getParameters['last_visit'] = date('Y-m-d');
+        }
+        $post = $this->posts->lastPost($getParameters['id_thread'],
+                                       $getParameters['last_visit']);
+        require $this->template;
+    }
+}
 $dsn = 'mysql:host=localhost;dbname=practical_php_refactoring';
 $username = 'root';
 $password = '';
-$posts = new Posts(new PDO($dsn, $username, $password));
-if (!isset($_GET['last_visit'])) {
-    $_GET['last_visit'] = date('Y-m-d');
-}
-$post = $posts->lastPost($_GET['id_thread'], $_GET['last_visit']);
+$action = new LastPostAction(
+                new Posts(new PDO($dsn, $username, $password)),
+                'last_post.php'
+          );
+$action->execute($_GET);
 ?>
-<div class="post">
-    <div class="author"><?php echo $post['author']; ?></div>
-    <div class="date"><?php echo $post['date']; ?></div>
-    <div class="text"><?php echo $post['text']; ?></div>
-</div>
