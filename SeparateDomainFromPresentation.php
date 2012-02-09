@@ -1,16 +1,33 @@
 <?php
+class Posts
+{
+    public function __construct(PDO $connection)
+    {
+        $this->connection = $connection;
+    }
+
+    /**
+     * @param int $threadId
+     * @param string $lastVisit Y-m-d format
+     * @return array    fields for the selected post
+     */
+    public function lastPost($threadId, $lastVisit)
+    {
+        $stmt = $this->connection->prepare("SELECT * FROM posts WHERE id_thread = :id_thread AND date >= :date ORDER BY date");
+        $stmt->bindValue(':id_thread', (int) $_GET['id_thread']);
+        $stmt->bindValue(':date', $lastVisit);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+}
 $dsn = 'mysql:host=localhost;dbname=practical_php_refactoring';
 $username = 'root';
 $password = '';
-$dbh = new PDO($dsn, $username, $password);
-$stmt = $dbh->prepare("SELECT * FROM posts WHERE id_thread = :id_thread AND date >= :date ORDER BY date");
-$stmt->bindValue(':id_thread', (int) $_GET['id_thread']);
+$posts = new Posts(new PDO($dsn, $username, $password));
 if (!isset($_GET['last_visit'])) {
     $_GET['last_visit'] = date('Y-m-d');
 }
-$stmt->bindValue(':date', $_GET['last_visit']);
-$stmt->execute();
-$post = $stmt->fetch();
+$post = $posts->lastPost($_GET['id_thread'], $_GET['last_visit']);
 ?>
 <div class="post">
     <div class="author"><?php echo $post['author']; ?></div>
