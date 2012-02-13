@@ -56,11 +56,7 @@ class OrdinaryTopic extends Topic
 {
     protected function decoratedTitleText()
     {
-        if ($this->inEvidence) {
-            return "<strong>$this->title</strong>";
-        } else {
-            return $this->title;
-        }
+        return $this->title;
     }
 }
 
@@ -68,10 +64,6 @@ class InEvidenceTopic extends Topic
 {
     protected function decoratedTitleText()
     {
-        if ($this->inEvidence) {
-            return "<strong>$this->title</strong>";
-        } else {
-            return $this->title;
-        }
+        return "<strong>$this->title</strong>";
     }
 }
