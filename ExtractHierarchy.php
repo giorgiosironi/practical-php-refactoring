@@ -37,13 +37,18 @@ class Topic
     public function title()
     {
         $title = '<div class="title">';
-        if ($this->inEvidence) {
-            $title .= "<strong>$this->title</strong>";
-        } else {
-            $title .= $this->title;
-        }
+        $title .= $this->decoratedTitleText();
         $title .= '</div>';
         return $title;
+    }
+
+    protected function decoratedTitleText()
+    {
+        if ($this->inEvidence) {
+            return "<strong>$this->title</strong>";
+        } else {
+            return $this->title;
+        }
     }
 }
 
