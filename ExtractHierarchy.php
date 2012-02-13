@@ -17,21 +17,19 @@ class ExtractHierarchy extends PHPUnit_Framework_TestCase
 abstract class Topic
 {
     protected $title;
-    protected $inEvidence;
 
     public static function fromFields($title, $inEvidence = false)
     {
         if ($inEvidence) {
-            return new InEvidenceTopic($title, $inEvidence);
+            return new InEvidenceTopic($title);
         } else {
-            return new OrdinaryTopic($title, $inEvidence);
+            return new OrdinaryTopic($title);
         }
     }
 
-    private function __construct($title, $inEvidence)
+    private function __construct($title)
     {
         $this->title = $title;
-        $this->inEvidence = $inEvidence;
     }
 
     public function title()
