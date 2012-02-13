@@ -16,8 +16,8 @@ class ExtractHierarchy extends PHPUnit_Framework_TestCase
 
 class Topic
 {
-    private $title;
-    private $inEvidence;
+    protected $title;
+    protected $inEvidence;
 
     public static function fromFields($title, $inEvidence = false)
     {
@@ -54,8 +54,24 @@ class Topic
 
 class OrdinaryTopic extends Topic
 {
+    protected function decoratedTitleText()
+    {
+        if ($this->inEvidence) {
+            return "<strong>$this->title</strong>";
+        } else {
+            return $this->title;
+        }
+    }
 }
 
 class InEvidenceTopic extends Topic
 {
+    protected function decoratedTitleText()
+    {
+        if ($this->inEvidence) {
+            return "<strong>$this->title</strong>";
+        } else {
+            return $this->title;
+        }
+    }
 }
