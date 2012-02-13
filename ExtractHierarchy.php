@@ -3,13 +3,13 @@ class ExtractHierarchy extends PHPUnit_Framework_TestCase
 {
     public function testAnOrdinaryTopicDisplaysItsTitleAsNormalText()
     {
-        $topic = new Topic('OOP in R');
+        $topic = Topic::fromFields('OOP in R');
         $this->assertEquals('<div class="title">OOP in R</div>', $topic->title());
     }
 
     public function testATopicInEvidenceDisplaysItselfAsStronger()
     {
-        $topic = new Topic('OOP in R', true);
+        $topic = Topic::fromFields('OOP in R', true);
         $this->assertEquals('<div class="title"><strong>OOP in R</strong></div>', $topic->title());
     }
 }
@@ -19,7 +19,16 @@ class Topic
     private $title;
     private $inEvidence;
 
-    public function __construct($title, $inEvidence = false)
+    public static function fromFields($title, $inEvidence = false)
+    {
+        if ($inEvidence) {
+            return new InEvidenceTopic($title, $inEvidence);
+        } else {
+            return new OrdinaryTopic($title, $inEvidence);
+        }
+    }
+
+    private function __construct($title, $inEvidence)
     {
         $this->title = $title;
         $this->inEvidence = $inEvidence;
@@ -36,4 +45,12 @@ class Topic
         $title .= '</div>';
         return $title;
     }
+}
+
+class OrdinaryTopic extends Topic
+{
+}
+
+class InEvidenceTopic extends Topic
+{
 }
