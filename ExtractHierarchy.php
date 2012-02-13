@@ -14,7 +14,7 @@ class ExtractHierarchy extends PHPUnit_Framework_TestCase
     }
 }
 
-class Topic
+abstract class Topic
 {
     protected $title;
     protected $inEvidence;
@@ -42,14 +42,10 @@ class Topic
         return $title;
     }
 
-    protected function decoratedTitleText()
-    {
-        if ($this->inEvidence) {
-            return "<strong>$this->title</strong>";
-        } else {
-            return $this->title;
-        }
-    }
+    /**
+     * @return string
+     */
+    abstract protected function decoratedTitleText();
 }
 
 class OrdinaryTopic extends Topic
